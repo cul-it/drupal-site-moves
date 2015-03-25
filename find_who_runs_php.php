@@ -45,7 +45,9 @@ if (is_callable('posix_geteuid')) {
 else {
   $filename="/tmp/find_who_runs_php.php.testfile.txt";
   file_put_contents($filename, "who owns this file?");
-  echo "Check ownership of $filename";
+  $output = shell_exec("ls -l $filename");
+  echo "Php writes files like:\n";
+  echo $output;
 }
 
 ?>
