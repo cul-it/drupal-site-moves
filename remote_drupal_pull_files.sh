@@ -7,20 +7,20 @@ remote_drupal_pull_files=1
 
 message "remote_drupal_pull_files preflight"
 
-[ -z "$LOCAL_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_FILES_PATH"
+[ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PRIVATE_FILES_PATH"
 [ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "remote_drupal_pull_files requires LOCAL_IS_PRODUCTION_SERVER"
 [ -z "$LOCAL_MACHINE" ] && error_exit "remote_drupal_pull_files requires LOCAL_MACHINE"
 [ -z "$LOCAL_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PATH"
 [ -z "$LOCAL_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_NAME"
 [ -z "$LOCAL_USER" ] && error_exit "remote_drupal_pull_files requires LOCAL_USER"
-[ -z "$REMOTE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_FILES_PATH"
+[ -z "$REMOTE_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PRIVATE_FILES_PATH"
 [ -z "$REMOTE_MACHINE" ] && error_exit "remote_drupal_pull_files requires REMOTE_MACHINE"
 [ -z "$REMOTE_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PATH"
 [ -z "$REMOTE_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires REMOTE_SITE_NAME"
 [ -z "$REMOTE_USER" ] && error_exit "remote_drupal_pull_files requires REMOTE_USER"
 
 [ -d "$LOCAL_PATH" ] || error_exit "no directory for $LOCAL_PATH"
-[ -d "$LOCAL_FILES_PATH" ] || error_exit "no directory for $LOCAL_FILES_PATH"
+[ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
 echo "...CHECK"
 
 message "putting $LOCAL_SITE_NAME into maintenance mode"
@@ -49,15 +49,15 @@ else
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/ $LOCAL_PATH/ || error_exit "can't move site files"
 fi
 
-message "moving site files (drupal_files) from" $REMOTE_FILES_PATH "to" $LOCAL_FILES_PATH "" "rsync wants your password"
+message "moving site files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" $LOCAL_PRIVATE_FILES_PATH "" "rsync wants your password"
 
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
   sudo rsync -avcz -e ssh --omit-dir-times --chmod=ug=rwX \
-    $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_FILES_PATH/ $LOCAL_FILES_PATH/ || error_exit "can't move site files"
+    $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
 else
   sudo rsync -avcz -e ssh --delete --omit-dir-times --chmod=ug=rwX  \
-  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_FILES_PATH/ $LOCAL_FILES_PATH/ || error_exit "can't move site files"
+  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
 fi
 echo "...CHECK"
 

@@ -8,7 +8,7 @@ drupal_site_permissions=1
 
 message "drupal_site_permissions setting ownership and permissions"
 
-[ -z "$LOCAL_FILES_PATH" ] && error_exit "drupal_site_permissions requires LOCAL_FILES_PATH"
+[ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "drupal_site_permissions requires LOCAL_PRIVATE_FILES_PATH"
 [ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "drupal_site_permissions requires LOCAL_IS_PRODUCTION_SERVER"
 [ -z "$LOCAL_PATH" ] && error_exit "drupal_site_permissions requires REMOTE_PATH"
 [ -z "$LOCAL_USER" ] && error_exit "drupal_site_permissions requires LOCAL_USER"
@@ -19,7 +19,7 @@ FINAL_USER=$LOCAL_USER
 FINAL_GROUP=$LOCAL_USER_GROUP
 FINAL_USER_PHP=$LOCAL_USER_PHP
 
-message "User: $FINAL_USER" "Group: $FINAL_GROUP" "PHP user: $FINAL_USER_PHP" "Site: $LOCAL_PATH" "Files: $LOCAL_FILES_PATH"
+message "User: $FINAL_USER" "Group: $FINAL_GROUP" "PHP user: $FINAL_USER_PHP" "Site: $LOCAL_PATH" "Files: $LOCAL_PRIVATE_FILES_PATH"
 
 echo ""
 echo "Site: $LOCAL_PATH"
@@ -63,8 +63,8 @@ do
 done
 
 # files directory
-echo "Files: $LOCAL_FILES_PATH"
-sudo chown -Rh $FINAL_USER_PHP:$FINAL_GROUP "$LOCAL_FILES_PATH" || error_exit "set owner for $LOCAL_FILES_PATH failed"
-sudo chmod 644 "$LOCAL_FILES_PATH" || error_exit "set permissions for $LOCAL_FILES_PATH failed"
+echo "Files: $LOCAL_PRIVATE_FILES_PATH"
+sudo chown -Rh $FINAL_USER_PHP:$FINAL_GROUP "$LOCAL_PRIVATE_FILES_PATH" || error_exit "set owner for $LOCAL_PRIVATE_FILES_PATH failed"
+sudo chmod 644 "$LOCAL_PRIVATE_FILES_PATH" || error_exit "set permissions for $LOCAL_PRIVATE_FILES_PATH failed"
 
 message "drupal_site_permissions complete"
