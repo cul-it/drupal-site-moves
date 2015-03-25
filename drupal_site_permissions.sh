@@ -7,9 +7,12 @@ drupal_site_permissions=1
 
 message "drupal_site_permissions setting ownership and permissions"
 
-[ -z "$LOCAL_FILES_PATH" ] && error_exit "local_drupal_db_restore requires LOCAL_FILES_PATH"
-[ -z "$LOCAL_PATH" ] && error_exit "local_drupal_db_restore requires REMOTE_PATH"
-[ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "local_drupal_db_restore requires LOCAL_IS_PRODUCTION_SERVER"
+[ -z "$LOCAL_FILES_PATH" ] && error_exit "drupal_site_permissions requires LOCAL_FILES_PATH"
+[ -z "$LOCAL_PATH" ] && error_exit "drupal_site_permissions requires REMOTE_PATH"
+[ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "drupal_site_permissions requires LOCAL_IS_PRODUCTION_SERVER"
+[ -z "$LOCAL_USER" ] && error_exit "drupal_site_permissions requires LOCAL_USER"
+[ -z "$LOCAL_USER_GROUP" ] && error_exit "drupal_site_permissions requires LOCAL_USER_GROUP"
+[ -z "$LOCAL_USER_PHP" ] && error_exit "drupal_site_permissions requires LOCAL_USER_PHP"
 
 FINAL_USER=$LOCAL_USER
 FINAL_GROUP=$LOCAL_USER_GROUP
