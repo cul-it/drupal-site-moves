@@ -97,4 +97,6 @@ source ${SCRIPTPATH}/local_drupal_db_restore.sh
 
 source ${SCRIPTPATH}/customize_robots_txt.sh
 
+source ${SCRIPTPATH}/drupal_site_permissions.sh
+
 message "pull_site_from_production complete" "have a nice day."
