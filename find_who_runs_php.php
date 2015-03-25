@@ -35,7 +35,7 @@ function GetUsernameFromUid($uid)
     return $uid;
 }
 
-if (function_exists('posix_geteuid')) {
+if (is_callable('posix_geteuid')) {
   $id = posix_geteuid();
   $name = GetUsernameFromUid($id);
   echo "*****************\n";
