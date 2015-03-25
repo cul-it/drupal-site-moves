@@ -33,7 +33,7 @@ SUBSITES=(default )
 #*********************************************
 #*********************************************
 
-LOCAL_IS_PRODUCTION_SERVER=1
+LOCAL_IS_PRODUCTION_SERVER=0
 
 echo "SCRIPTPATH $SCRIPTPATH"
 
