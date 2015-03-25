@@ -21,7 +21,7 @@ LOCAL_PATH=/Applications/MAMP/htdocs/law
 LOCAL_PRIVATE_FILES_PATH=/Applications/MAMP/htdocs/law_files
 LOCAL_BACKUP_PATH=${LOCAL_PRIVATE_FILES_PATH}/movers/$SCRIPT_ID
 LOCAL_USER=$USER
-LOCAL_USER_GROUP=wheel
+LOCAL_USER_GROUP=localaccounts
 LOCAL_USER_PHP=Guest
 
 #always include at least default
