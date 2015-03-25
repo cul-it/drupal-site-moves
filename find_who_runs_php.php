@@ -1,5 +1,5 @@
 <?php
-// find_who_runs_php.sh
+// find_who_runs_php.php
 
 /**
  * return user name from id
@@ -35,10 +35,17 @@ function GetUsernameFromUid($uid)
     return $uid;
 }
 
-$id = posix_geteuid();
-$name = GetUsernameFromUid($id);
-echo "*****************\n";
-echo "php runs as $name\n";
-echo "*****************\n";
+if (function_exists('posix_geteuid')) {
+  $id = posix_geteuid();
+  $name = GetUsernameFromUid($id);
+  echo "*****************\n";
+  echo "php runs as $name\n";
+  echo "*****************\n";
+}
+else {
+  $filename="/tmp/find_who_runs_php.php.testfile.txt";
+  file_put_contents($filename, "who owns this file?");
+  echo "Check ownership of $filename";
+}
 
 ?>
