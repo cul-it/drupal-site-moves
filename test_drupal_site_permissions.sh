@@ -35,7 +35,9 @@ SUBSITES=(default )
 
 LOCAL_IS_PRODUCTION_SERVER=1
 
+echo "SCRIPTPATH $SCRIPTPATH"
+
 BASEDIR=$(dirname $0)
-source ${BASEDIR}/flow_functions.sh
+source ${SCRIPTPATH}/flow_functions.sh
 
 source ${SCRIPTPATH}/drupal_site_permissions.sh
