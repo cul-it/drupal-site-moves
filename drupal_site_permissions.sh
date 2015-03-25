@@ -18,17 +18,19 @@ FINAL_USER=$LOCAL_USER
 FINAL_GROUP=$LOCAL_USER_GROUP
 FINAL_USER_PHP=$LOCAL_USER_PHP
 
-sudo chmod -R ug+w "$LOCAL_PATH"
-sudo chown -R $FINAL_USER:$FINAL_GROUP "$LOCAL_PATH"
-sudo chown -Rh $FINAL_USER:$FINAL_GROUP "$LOCAL_PATH/sites"
-sudo chmod -R g+s "$LOCAL_PATH/sites"
+message "User: $FINAL_USER" "Group: $FINAL_GROUP" "PHP user: $FINAL_USER_PHP"
+
+sudo chmod -R ug+w "$LOCAL_PATH" || error_exit "ug+w failed"
+sudo chown -R $FINAL_USER:$FINAL_GROUP "$LOCAL_PATH" || error_exit "set user:group to $FINAL_USER:$FINAL_GROUP failed"
+sudo chown -Rh $FINAL_USER:$FINAL_GROUP "$LOCAL_PATH/sites" || error_exit "set user:group of /sites failed"
+sudo chmod -R g+s "$LOCAL_PATH/sites" || error_exit "g+s of /sites failed"
 
 # for each subsite
-FILES="$LOCAL_PATH/sites/*"
+FILES="$LOCAL_PATH/sites/*/files"
 for subsite in $FILES
 do
-  echo "$subsite/files"
-  sudo chown -Rh $FINAL_USER_PHP:$FINAL_GROUP "$subsite/files"
+  echo "$subsite"
+  sudo chown -Rh $FINAL_USER_PHP:$FINAL_GROUP "$subsite" || error_exit "set permissions for /files in $subsite failed"
 done
 
 message "drupal_site_permissions complete"
