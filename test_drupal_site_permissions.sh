@@ -33,6 +33,8 @@ SUBSITES=(default )
 #*********************************************
 #*********************************************
 
+LOCAL_IS_PRODUCTION_SERVER=1
+
 BASEDIR=$(dirname $0)
 source ${BASEDIR}/flow_functions.sh
 
