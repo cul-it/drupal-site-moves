@@ -40,15 +40,6 @@ do
   sudo find $d -type f -exec chmod ug=rw,o= '{}' \;
 done
 
-# settings.php should not be writable
-for d in $LOCAL_PATH/sites/*/settings.php
-do
-  echo "Settings: ${d}"
-  [ -f "${d}" ] || error_exit "$d is not a file"
-  sudo chmod ug=r,o= "${d}"
-  sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
-done
-
 # sites/all/<modules,themes,libraries> writable by group if this is a test server (.git and .svn)
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 0 ]; then
   echo "Allow for .git and .svn on test servers"
@@ -61,5 +52,14 @@ cd "$LOCAL_PRIVATE_FILES_PATH" || error_exit "cd $LOCAL_PRIVATE_FILES_PATH faile
 sudo chown -R $FINAL_USER_PHP:$FINAL_GROUP .
 sudo find . -type d -name files -exec chmod ug=rwx,o= '{}' \;
 sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+
+# settings.php should not be writable
+for d in $LOCAL_PATH/sites/*/settings.php
+do
+  echo "Settings: ${d}"
+  [ -f "${d}" ] || error_exit "$d is not a file"
+  sudo chmod ug=r,o= "${d}"
+  sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
+done
 
 message "drupal_site_permissions complete"
