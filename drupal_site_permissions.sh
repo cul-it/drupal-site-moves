@@ -25,13 +25,13 @@ sudo echo "Site: $LOCAL_PATH"
 
 cd "$LOCAL_PATH" || error_exit "cd $LOCAL_PATH failed"
 sudo chown -R $FINAL_USER:$FINAL_GROUP .
-sudo find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
-sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+sudo find . -type d -exec chmod u=rwx,g=rx,o=rx '{}' \;
+sudo find . -type f -exec chmod u=rw,g=r,o=r '{}' \;
 
 # php has to write in sites/*/files (subsite/files)
 cd "$LOCAL_PATH/sites" || error_exit "cd $LOCAL_PATH/sites failed"
 sudo chown -R $FINAL_USER_PHP:$FINAL_GROUP .
-sudo find . -type d -name files -exec chmod ug=rwx,o= '{}' \;
+sudo find . -type d -name files -exec chmod ug=rwx,o=rx '{}' \;
 for d in $LOCAL_PATH/sites/*/files
 do
   echo "Subsite: ${d}"
