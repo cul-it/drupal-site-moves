@@ -60,6 +60,7 @@ do
   [ -f "${d}" ] || error_exit "$d is not a file"
   sudo chmod ug=r,o= "${d}"
   sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
+  ls -l "${d}"
 done
 
 message "drupal_site_permissions complete"
