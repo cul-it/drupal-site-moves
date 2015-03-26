@@ -46,6 +46,7 @@ do
   echo "Settings: ${d}"
   [ -f "${d}" ] || error_exit "$d is not a file"
   sudo chmod ug=r,o= "${d}"
+  sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
 done
 
 # sites/all/<modules,themes,libraries> writable by group if this is a test server (.git and .svn)
