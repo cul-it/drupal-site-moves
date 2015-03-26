@@ -31,11 +31,6 @@ VICTORIA01=victoria01.serverfarm.cornell.edu
 VICTORIA02=victoria02.serverfarm.cornell.edu
 VICTORIA03=victoria03.library.cornell.edu
 
-# Make sure we're on the test machine
-if [ "$HOSTNAME" != "$LOCAL_MACHINE" ]; then
-  usage "Expecting to run $0 for $REMOTE_SITE_NAME on $LOCAL_MACHINE"
-fi
-
 # use 0 for test server 1 for production server
 case "$HOSTNAME" in
   "$VICTORIA01" | "$VICTORIA03") LOCAL_IS_PRODUCTION_SERVER=1 ;;
