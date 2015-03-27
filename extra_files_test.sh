@@ -50,7 +50,7 @@ do
         echo "Found $foo"
       else
         sudo touch "$foo" || error_exit "can't touch $foo"
-        sudo chown "$LOCAL_USER_PHP:LOCAL_USER_GROUP" "$foo" || error_exit "can't chown $foo"
+        sudo chown "$LOCAL_USER_PHP:$LOCAL_USER_GROUP" "$foo" || error_exit "can't chown $foo"
         sudo chmod ug=rw,o=r "$foo" || error_exit "can't chmod $foo"
         echo "Wrote $foo"
       fi
