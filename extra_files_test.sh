@@ -47,13 +47,23 @@ do
   foo="$test/$CRAZY_FILE_NAME"
   case "$ACTION" in
     set)
-      [ -f "$foo" ] && echo "Found $foo" || touch "$foo" && echo "Wrote $foo" || error_exit "writing $foo failed"
+      if [ -f "$foo" ] ;then
+        echo "Found $foo"
+      else
+        sudo touch "$foo" || error_exit "can't touch $foo"
+        sudo chown "$LOCAL_USER_PHP:LOCAL_USER_GROUP" "$foo" || error_exit "can't chown $foo"
+        sudo chmod ug=rw,o=r "$foo" || error_exit "can't chmod $foo"
+        echo "Wrote $foo"
+      fi
       ;;
     check)
       [ -f "$foo" ] && echo "Found $foo" || echo "Did NOT find $foo"
       ;;
     clear)
-      [ -f "$foo" ] && rm "$foo" && echo "Deleted $foo"
+      if [ -f "$foo" ] ;then
+        rm "$foo" || error_exit "can't delete $foo"
+        echo "Deleted $foo"
+      fi
       ;;
     *) usage "<action> must be set, find, or clear"
   esac
