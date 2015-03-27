@@ -55,6 +55,10 @@ sudo chown -R $FINAL_USER_PHP:$FINAL_GROUP .
 sudo find . -type d -name files -exec chmod ug=rwx,o= '{}' \;
 sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
 
+# exception for the files the mover scripts need to read/write from other machines
+cd "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "cd $LOCAL_SITE_MOVES_DIRECTORY failed"
+sudo find . -type f -exec chmod u=rw,g=rw,o= '{}' \;
+
 # settings.php should not be writable
 for d in $LOCAL_PATH/sites/*/settings.php
 do
