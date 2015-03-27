@@ -39,7 +39,7 @@ LIBRARIES="$LOCAL_PATH/site/all/libraries"
 
 tests=("$LOCAL_PATH" "$LOCAL_PRIVATE_FILES_PATH" "$LOCAL_SITE_MOVES_DIRECTORY" "$SITES_FILES" "$MODULES" "$THEMES" "$LIBRARIES")
 
-echo ""
+echo "Host: $HOSTNAME"
 
 for test in "${tests[@]}"
 do
