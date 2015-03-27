@@ -39,7 +39,7 @@ LIBRARIES="$LOCAL_PATH/sites/all/libraries"
 
 tests=("$LOCAL_PATH" "$LOCAL_PRIVATE_FILES_PATH" "$LOCAL_SITE_MOVES_DIRECTORY" "$SITES_FILES" "$MODULES" "$THEMES" "$LIBRARIES")
 
-echo "Host: $HOSTNAME"
+message "$SCRIPT_ID will $action test files" "in $LOCAL_SITE_NAME" "on $HOSTNAME"
 
 for test in "${tests[@]}"
 do
