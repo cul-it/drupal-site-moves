@@ -60,7 +60,7 @@ do
   target="$PUPPET_SCRIPTS_DIR/$file"
   echo $foo
   if [ -f $foo ] ;then
-    rm "$foo" || error_exit "can't remove $foo"
+    svn delete "$foo" || error_exit "can't remove $foo"
   fi
 done
 
