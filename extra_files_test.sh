@@ -33,9 +33,9 @@ function usage() {
 ACTION=$2
 
 SITES_FILES="$LOCAL_PATH/sites/default/files"
-MODULES="$LOCAL_PATH/site/all/modules"
-THEMES="$LOCAL_PATH/site/all/themes"
-LIBRARIES="$LOCAL_PATH/site/all/libraries"
+MODULES="$LOCAL_PATH/sites/all/modules"
+THEMES="$LOCAL_PATH/sites/all/themes"
+LIBRARIES="$LOCAL_PATH/sites/all/libraries"
 
 tests=("$LOCAL_PATH" "$LOCAL_PRIVATE_FILES_PATH" "$LOCAL_SITE_MOVES_DIRECTORY" "$SITES_FILES" "$MODULES" "$THEMES" "$LIBRARIES")
 
