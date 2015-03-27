@@ -43,6 +43,7 @@ echo "Host: $HOSTNAME"
 
 for test in "${tests[@]}"
 do
+  [ -d "$test" ] || error_exit "directory $test does not exist"
   foo="$test/$CRAZY_FILE_NAME"
   case "$ACTION" in
     set)
