@@ -60,7 +60,7 @@ do
       ;;
     clear)
       if [ -f "$foo" ] ;then
-        rm "$foo" || error_exit "can't delete $foo"
+        sudo rm "$foo" || error_exit "can't delete $foo"
         echo "Deleted $foo"
       fi
       ;;
