@@ -50,7 +50,7 @@ do
   foo="$SVN_SCRIPTS_DIR/$file"
   target="$PUPPET_SCRIPTS_DIR/$file"
   echo $foo
-  [ -f "$target" ] || NEWFILES+=("$foo")
+  [ -f "$target" ] || NEWFILES+=("$file")
   [ -f $foo ] && mv "$foo" "$PUPPET_SCRIPTS_DIR/" || error_exit "can't move $foo"
 done
 
@@ -70,12 +70,17 @@ do
   foo="$GIT_MOVER_SCRIPTS_DIR/$file"
   target="$PUPPET_SCRIPTS_DIR/$file"
   echo $foo
-  [ -f "$target" ] || NEWFILES+=("$foo")
+  [ -f "$target" ] || NEWFILES+=("$file")
   [ -f $foo ] && mv "$foo" "$PUPPET_SCRIPTS_DIR/" || error_exit "can't move $foo"
 done
 
 message "committing the changes to svn for puppet"
 cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
-svn commit -m 'Latest versions of drupal site move and maker scripts from "$SCRIPT_ID"' || error_exit "commit failed"
+for file in "${NEWFILES[@]}"
+do
+  echo "adding $file"
+  svn add "$file" || error_exit "can't svn add $file"
+done
+#svn commit -m 'Latest versions of drupal site move and maker scripts from "$SCRIPT_ID"' || error_exit "commit failed"
 
 message "Done. Check $WORK_DIR"
