@@ -54,16 +54,6 @@ do
   [ -f $foo ] && mv "$foo" "$PUPPET_SCRIPTS_DIR/" || error_exit "can't move $foo"
 done
 
-for file in "${svns_remove[@]}"
-do
-  foo="$PUPPET_SCRIPTS_DIR/$file"
-  echo $foo
-  if [ -f $foo ] ;then
-    cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
-    svn delete "$file" || error_exit "can't remove $foo"
-  fi
-done
-
 gits=(customize_robots_txt.sh drupal_site_permissions.sh find_who_runs_php.php flow_functions.sh local_drupal_db_restore.sh pull_site_from_production.sh pull_site_from_test.sh remote_drupal_db_backup.sh remote_drupal_pull_files.sh set_permissions.sh)
 for file in "${gits[@]}"
 do
@@ -75,6 +65,16 @@ do
 done
 
 message "committing the changes to svn for puppet"
+
+for file in "${svns_remove[@]}"
+do
+  foo="$PUPPET_SCRIPTS_DIR/$file"
+  if [ -f $foo ] ;then
+    cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
+    svn delete "$file" || error_exit "can't remove $foo"
+  fi
+done
+
 for file in "${NEWFILES[@]}"
 do
   echo "adding $file"
