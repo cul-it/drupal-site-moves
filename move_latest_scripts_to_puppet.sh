@@ -57,10 +57,10 @@ done
 for file in "${svns_remove[@]}"
 do
   foo="$PUPPET_SCRIPTS_DIR/$file"
-  target="$PUPPET_SCRIPTS_DIR/$file"
   echo $foo
   if [ -f $foo ] ;then
-    svn delete "$foo" || error_exit "can't remove $foo"
+    cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
+    svn delete "$file" || error_exit "can't remove $foo"
   fi
 done
 
@@ -75,10 +75,10 @@ do
 done
 
 message "committing the changes to svn for puppet"
-cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
 for file in "${NEWFILES[@]}"
 do
   echo "adding $file"
+  cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
   svn add "$file" || error_exit "can't svn add $file"
 done
 #svn commit -m 'Latest versions of drupal site move and maker scripts from "$SCRIPT_ID"' || error_exit "commit failed"
