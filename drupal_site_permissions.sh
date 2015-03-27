@@ -14,6 +14,8 @@ message "drupal_site_permissions setting ownership and permissions"
 [ -z "$LOCAL_USER" ] && error_exit "drupal_site_permissions requires LOCAL_USER"
 [ -z "$LOCAL_USER_GROUP" ] && error_exit "drupal_site_permissions requires LOCAL_USER_GROUP"
 [ -z "$LOCAL_USER_PHP" ] && error_exit "drupal_site_permissions requires LOCAL_USER_PHP"
+[ -z "$LOCAL_USER_PHP" ] && error_exit "drupal_site_permissions requires LOCAL_USER_PHP"
+[ -z "$LOCAL_SITE_MOVES_DIRECTORY" ] && error_exit "drupal_site_permissions requires LOCAL_SITE_MOVES_DIRECTORY"
 
 FINAL_USER=$LOCAL_USER
 FINAL_GROUP=$LOCAL_USER_GROUP
