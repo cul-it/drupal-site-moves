@@ -43,7 +43,7 @@ echo "Building $PUPPET_SCRIPTS_DIR"
 svn co --quiet "$PUPPET_SCRIPTS" && [ -d "$PUPPET_SCRIPTS_DIR" ] || error_exit "can't get $PUPPET_SCRIPTS"
 
 svns=(dr-make.sh dr-move-db.sh dr-move-files.sh move-goldsen-to-production.sh move-goldsen-to-test.sh update_test_from_victoria03.sh update_victoria03_from_test.sh)
-svns_remove=(set_drupal_permissions.sh update_production_from_test.sh update_test_from_production.sh)
+svns_remove=(set_drupal_permissions.sh )
 
 for file in "${svns[@]}"
 do
