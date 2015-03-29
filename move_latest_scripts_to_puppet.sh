@@ -81,6 +81,8 @@ do
   cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
   svn add "$file" || error_exit "can't svn add $file"
 done
+
+cd "$PUPPET_SCRIPTS_DIR" || error_exit "cd to $PUPPET_SCRIPTS_DIR failed"
 svn commit -m 'Latest versions of drupal site move and maker scripts from "$SCRIPT_ID"' || error_exit "commit failed"
 
 message "Done. Check $WORK_DIR"
