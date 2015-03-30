@@ -34,17 +34,17 @@ message "moving site code files (htdocs) from" $REMOTE_PATH "to" $LOCAL_PATH "" 
 # --exclude=sites/*/settings.php
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
-  sudo rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --chmod=ug=rwX \
+  rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --chmod=ug=rwX \
     --exclude=sites/*/settings.php \
     --exclude=sites/all/* \
     $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/ $LOCAL_PATH/ || error_exit "can't move site files"
 
   # but DO delete extra files in modules/libraries/themes
-  sudo rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX \
+  rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX \
     --exclude=sites/*/settings.php \
     $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/sites/all/ $LOCAL_PATH/sites/all/ || error_exit "can't move site files"
 else
-    sudo rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX  \
+    rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX  \
   --exclude=sites/*/settings.php \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/ $LOCAL_PATH/ || error_exit "can't move site files"
 fi
@@ -53,10 +53,10 @@ message "moving site files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" 
 
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
-  sudo rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --chmod=ug=rwX \
+  rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --chmod=ug=rwX \
     $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
 else
-  sudo rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX  \
+  rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --chmod=ug=rwX  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
 fi
 echo "...CHECK"
