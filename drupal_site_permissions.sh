@@ -23,7 +23,7 @@ FINAL_USER_PHP=$LOCAL_USER_PHP
 
 message "User: $FINAL_USER" "Group: $FINAL_GROUP" "PHP user: $FINAL_USER_PHP"
 
-sudo echo "Site: $LOCAL_PATH"
+echo "Site: $LOCAL_PATH"
 
 cd "$LOCAL_PATH" || error_exit "cd $LOCAL_PATH failed"
 sudo chown -R $FINAL_USER:$FINAL_GROUP .
