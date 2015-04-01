@@ -57,7 +57,7 @@ sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
 
 # exception for the files the mover scripts need to read/write from other machines
 cd "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "cd $LOCAL_SITE_MOVES_DIRECTORY failed"
-sudo find . -type f -exec chmod u=rw,g=rw,o= '{}' \;
+sudo chmod -R u=rw,g=rw,o= "$LOCAL_SITE_MOVES_DIRECTORY"
 
 # settings.php should not be writable
 for d in $LOCAL_PATH/sites/*/settings.php
