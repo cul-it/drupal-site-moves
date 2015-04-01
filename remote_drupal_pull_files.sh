@@ -50,17 +50,21 @@ else
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/ $LOCAL_PATH/ || error_exit "can't move site files"
 fi
 
-message "moving site files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" $LOCAL_PRIVATE_FILES_PATH
+message "moving site private files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" $LOCAL_PRIVATE_FILES_PATH
 
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
   rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --no-perms --no-times --chmod=ug=rwX \
-    $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
+    $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move production site private files"
 else
   rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
-  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site files"
+  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PRIVATE_FILES_PATH/ $LOCAL_PRIVATE_FILES_PATH/ || error_exit "can't move site private files"
 fi
 echo "...CHECK"
+
+message "moving database backup from" $REMOTE_SITE_MOVES_DIRECTORY "to" $LOCAL_SITE_MOVES_DIRECTORY
+rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
+  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_DIRECTORY $LOCAL_SITE_MOVES_DIRECTORY/ || error_exit "can't move site backup files"
 
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
