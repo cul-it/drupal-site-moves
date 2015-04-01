@@ -7,20 +7,27 @@ remote_drupal_pull_files=1
 
 message "remote_drupal_pull_files preflight"
 
-[ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PRIVATE_FILES_PATH"
+[ -z "$LOCAL_BACKUP_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_BACKUP_PATH"
 [ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "remote_drupal_pull_files requires LOCAL_IS_PRODUCTION_SERVER"
 [ -z "$LOCAL_MACHINE" ] && error_exit "remote_drupal_pull_files requires LOCAL_MACHINE"
 [ -z "$LOCAL_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PATH"
+[ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PRIVATE_FILES_PATH"
 [ -z "$LOCAL_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_NAME"
 [ -z "$LOCAL_USER" ] && error_exit "remote_drupal_pull_files requires LOCAL_USER"
-[ -z "$REMOTE_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PRIVATE_FILES_PATH"
+[ -z "$REMOTE_BACKUP_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_BACKUP_PATH"
 [ -z "$REMOTE_MACHINE" ] && error_exit "remote_drupal_pull_files requires REMOTE_MACHINE"
 [ -z "$REMOTE_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PATH"
+[ -z "$REMOTE_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PRIVATE_FILES_PATH"
 [ -z "$REMOTE_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires REMOTE_SITE_NAME"
 [ -z "$REMOTE_USER" ] && error_exit "remote_drupal_pull_files requires REMOTE_USER"
 
 [ -d "$LOCAL_PATH" ] || error_exit "no directory for $LOCAL_PATH"
 [ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
+
+# set up local backup directory
+rcmd "[ -d \"${LOCAL_BACKUP_PATH}\" ] || mkdir -p \"${LOCAL_BACKUP_PATH}\""
+rcmd "[ -d \"${LOCAL_BACKUP_PATH}\" ] || echo 'make directory failed' && exit 1"
+
 echo "...CHECK"
 
 message "putting $LOCAL_SITE_NAME into maintenance mode"
@@ -62,9 +69,9 @@ else
 fi
 echo "...CHECK"
 
-message "moving database backup from" $REMOTE_SITE_MOVES_DIRECTORY "to" $LOCAL_SITE_MOVES_DIRECTORY
+message "moving database backup from" $REMOTE_BACKUP_PATH "to" $LOCAL_BACKUP_PATH
 rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
-  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_DIRECTORY $LOCAL_SITE_MOVES_DIRECTORY/ || error_exit "can't move site backup files"
+  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_BACKUP_PATH $LOCAL_BACKUP_PATH/ || error_exit "can't move site backup files"
 
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
