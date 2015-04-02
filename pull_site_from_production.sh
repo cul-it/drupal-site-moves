@@ -90,6 +90,10 @@ else
   ConfirmOrExit
 fi
 
+# set up the work area for this script
+sudo mkdir -p "$LOCAL_SITE_MOVES_AREA"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_AREA"
+sudo chgrp -R "$LOCAL_USER_GROUP"
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
 

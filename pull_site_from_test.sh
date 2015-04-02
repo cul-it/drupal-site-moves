@@ -13,7 +13,8 @@ REMOTE_MACHINE=victoria02.library.cornell.edu
 REMOTE_SITE_NAME=$1
 REMOTE_PATH=/libweb/sites/${REMOTE_SITE_NAME}/htdocs
 REMOTE_PRIVATE_FILES_PATH=/libweb/sites/${REMOTE_SITE_NAME}/drupal_files
-REMOTE_SITE_MOVES_DIRECTORY=/libweb/drupal/backups/${REMOTE_SITE_NAME}/drupal-site-moves/${REMOTE_USER}
+REMOTE_SITE_MOVES_AREA=/libweb/drupal/backups/${REMOTE_SITE_NAME}/drupal-site-moves
+REMOTE_SITE_MOVES_DIRECTORY=${REMOTE_SITE_MOVES_AREA}/${REMOTE_USER}
 REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 
 LOCAL_USER=$USER
@@ -21,7 +22,8 @@ LOCAL_MACHINE=victoria01.serverfarm.cornell.edu
 LOCAL_SITE_NAME=$2
 LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
-LOCAL_SITE_MOVES_DIRECTORY=/libweb/drupal/backups/${LOCAL_SITE_NAME}/drupal-site-moves/${LOCAL_USER}
+LOCAL_SITE_MOVES_AREA=/libweb/drupal/backups/${LOCAL_SITE_NAME}/drupal-site-moves
+LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}/${LOCAL_USER}
 LOCAL_SITE_MOVES_BACKUP_PATH=${LOCAL_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 LOCAL_USER_GROUP=lib_web_dev_role
 LOCAL_USER_PHP=apache
@@ -88,6 +90,10 @@ else
   ConfirmOrExit
 fi
 
+# set up the work area for this script
+sudo mkdir -p "$LOCAL_SITE_MOVES_AREA"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_AREA"
+sudo chgrp -R "$LOCAL_USER_GROUP"
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
 
