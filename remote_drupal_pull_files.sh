@@ -25,7 +25,7 @@ message "remote_drupal_pull_files preflight"
 [ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
 
 # set up local backup directory
-sudo mkdir -p -m og=rwx,o=rx \"${LOCAL_BACKUP_PATH}\"
+sudo mkdir -p -m og=rwx,o=rx -v \"${LOCAL_BACKUP_PATH}\"
 [ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'make directory ${LOCAL_BACKUP_PATH} failed'
 
 echo "...CHECK"
