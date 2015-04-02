@@ -70,6 +70,7 @@ fi
 echo "...CHECK"
 
 message "moving database backup from" $REMOTE_BACKUP_PATH "to" $LOCAL_BACKUP_PATH
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'directory ${LOCAL_BACKUP_PATH} doe not exist'
 rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_BACKUP_PATH/ $LOCAL_BACKUP_PATH/ || error_exit "can't move site backup files"
 
