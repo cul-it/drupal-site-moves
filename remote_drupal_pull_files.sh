@@ -26,7 +26,7 @@ message "remote_drupal_pull_files preflight"
 
 # set up local backup directory
 mkdir -p -v \"${LOCAL_BACKUP_PATH}\"
-[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'make directory ${LOCAL_BACKUP_PATH} failed'
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'make directory $LOCAL_BACKUP_PATH failed'
 
 echo "...CHECK"
 
@@ -34,6 +34,9 @@ message "putting $LOCAL_SITE_NAME into maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
 drush vset maintenance_mode 1
 drush cc all
+
+#test
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit '2 directory $LOCAL_BACKUP_PATH does not exist'
 
 # rsync entire site to local
 #  --dry-run to test
@@ -59,6 +62,9 @@ fi
 
 message "moving site private files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" $LOCAL_PRIVATE_FILES_PATH
 
+#test
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit '1 directory $LOCAL_BACKUP_PATH does not exist'
+
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
   rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --no-perms --no-times --chmod=ug=rwX \
@@ -70,7 +76,7 @@ fi
 echo "...CHECK"
 
 message "moving database backup from" $REMOTE_BACKUP_PATH "to" $LOCAL_BACKUP_PATH
-[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'directory ${LOCAL_BACKUP_PATH} doe not exist'
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'directory $LOCAL_BACKUP_PATH does not exist'
 rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_BACKUP_PATH/ $LOCAL_BACKUP_PATH/ || error_exit "can't move site backup files"
 
