@@ -60,9 +60,6 @@ fi
 
 message "moving site private files (drupal_files) from" $REMOTE_PRIVATE_FILES_PATH "to" $LOCAL_PRIVATE_FILES_PATH
 
-#test
-[ -d \"${LOCAL_SITE_MOVES_BACKUP_PATH}\" ] || error_exit '1 directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
-
 if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   # do not delete extra files in the target when moving to production
   rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --no-perms --no-times --chmod=ug=rwX \
