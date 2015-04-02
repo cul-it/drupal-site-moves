@@ -25,8 +25,8 @@ message "remote_drupal_pull_files preflight"
 [ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
 
 # set up local backup directory
-mkdir -p -v \"${LOCAL_SITE_MOVES_BACKUP_PATH}\"
-[ -d \"${LOCAL_SITE_MOVES_BACKUP_PATH}\" ] || error_exit 'make directory $LOCAL_SITE_MOVES_BACKUP_PATH failed'
+mkdir -p -v "${LOCAL_SITE_MOVES_BACKUP_PATH}"
+[ -d "${LOCAL_SITE_MOVES_BACKUP_PATH}" ] || error_exit 'make directory $LOCAL_SITE_MOVES_BACKUP_PATH failed'
 
 echo "...CHECK"
 
@@ -91,8 +91,8 @@ echo "...CHECK"
 
 message "moving database backup from" $REMOTE_SITE_MOVES_BACKUP_PATH "to" $LOCAL_SITE_MOVES_BACKUP_PATH
 set -x # activate debugging
-mkdir -p -v \"${LOCAL_SITE_MOVES_BACKUP_PATH}\"
-[ -d \"${LOCAL_SITE_MOVES_BACKUP_PATH}\" ] || error_exit 'directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
+mkdir -p -v "${LOCAL_SITE_MOVES_BACKUP_PATH}"
+[ -d "${LOCAL_SITE_MOVES_BACKUP_PATH}" ] || error_exit 'directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
 
 echo "rsync -avcz -e \"ssh -l $REMOTE_USER\" --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ "
