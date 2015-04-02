@@ -34,6 +34,21 @@ message "putting $LOCAL_SITE_NAME into maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
 drush vset maintenance_mode 1
 drush cc all
+[ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "remote_drupal_pull_files requires LOCAL_IS_PRODUCTION_SERVER"
+[ -z "$LOCAL_MACHINE" ] && error_exit "remote_drupal_pull_files requires LOCAL_MACHINE"
+[ -z "$LOCAL_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PATH"
+[ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PRIVATE_FILES_PATH"
+[ -z "$LOCAL_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_NAME"
+[ -z "$LOCAL_USER" ] && error_exit "remote_drupal_pull_files requires LOCAL_USER"
+[ -z "$REMOTE_BACKUP_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_BACKUP_PATH"
+[ -z "$REMOTE_MACHINE" ] && error_exit "remote_drupal_pull_files requires REMOTE_MACHINE"
+[ -z "$REMOTE_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PATH"
+[ -z "$REMOTE_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PRIVATE_FILES_PATH"
+[ -z "$REMOTE_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires REMOTE_SITE_NAME"
+[ -z "$REMOTE_USER" ] && error_exit "remote_drupal_pull_files requires REMOTE_USER"
+
+[ -d "$LOCAL_PATH" ] || error_exit "no directory for $LOCAL_PATH"
+[ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
 
 #test
 [ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit '2 directory $LOCAL_BACKUP_PATH does not exist'
