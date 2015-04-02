@@ -30,8 +30,7 @@ function rcmd () {
 }
 
 # set up remote backup directory
-rcmd "echo $USER"
-rcmd "mkdir -pv ${REMOTE_SITE_MOVES_BACKUP_PATH}"
+rcmd "mkdir -pv ${REMOTE_SITE_MOVES_BACKUP_PATH} || echo 'mdkir ${REMOTE_SITE_MOVES_BACKUP_PATH} failed"
 rcmd "[ -d ${REMOTE_SITE_MOVES_BACKUP_PATH} ] || echo 'make directory failed' "
 rcmd "echo ${STAMP} > ${REMOTE_TIMESTAMP_FILE} || echo 'write timestamp failed' && exit 1 "
 echo "...CHECK"
