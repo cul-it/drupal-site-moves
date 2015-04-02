@@ -26,7 +26,7 @@ message "remote_drupal_pull_files preflight"
 
 # set up local backup directory
 [ -d \"${LOCAL_BACKUP_PATH}\" ] || mkdir -p \"${LOCAL_BACKUP_PATH}\"
-[ -d \"${LOCAL_BACKUP_PATH}\" ] || echo 'make directory ${LOCAL_BACKUP_PATH} failed' && exit 1
+[ -d \"${LOCAL_BACKUP_PATH}\" ] || error_exit 'make directory ${LOCAL_BACKUP_PATH} failed'
 
 echo "...CHECK"
 
