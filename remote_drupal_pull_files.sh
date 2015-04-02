@@ -90,6 +90,7 @@ fi
 echo "...CHECK"
 
 message "moving database backup from" $REMOTE_SITE_MOVES_BACKUP_PATH "to" $LOCAL_SITE_MOVES_BACKUP_PATH
+set -x # activate debugging
 mkdir -p -v \"${LOCAL_SITE_MOVES_BACKUP_PATH}\"
 [ -d \"${LOCAL_SITE_MOVES_BACKUP_PATH}\" ] || error_exit 'directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
 
@@ -97,6 +98,7 @@ echo "rsync -avcz -e \"ssh -l $REMOTE_USER\" --omit-dir-times --no-perms --no-ti
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ "
 rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ || error_exit "can't move site backup files"
+set +x # deactivate debugging
 
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
