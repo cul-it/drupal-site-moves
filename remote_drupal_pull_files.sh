@@ -71,7 +71,7 @@ echo "...CHECK"
 
 message "moving database backup from" $REMOTE_BACKUP_PATH "to" $LOCAL_BACKUP_PATH
 rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
-  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_BACKUP_PATH $LOCAL_BACKUP_PATH/ || error_exit "can't move site backup files"
+  $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_BACKUP_PATH/ $LOCAL_BACKUP_PATH/ || error_exit "can't move site backup files"
 
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
