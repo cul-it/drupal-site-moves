@@ -31,9 +31,8 @@ mkdir -p -v \"${LOCAL_SITE_MOVES_BACKUP_PATH}\"
 echo "...CHECK"
 
 message "putting $LOCAL_SITE_NAME into maintenance mode"
-cd $LOCAL_PATH || error_exit "can not get to $LOCAL_PATH"
-drush vset maintenance_mode 1
-drush cc all
+/bin/bash ${BASEDIR}/drupal_maintenance_mode.sh enter $LOCAL_PATH
+
 [ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "remote_drupal_pull_files requires LOCAL_IS_PRODUCTION_SERVER"
 [ -z "$LOCAL_MACHINE" ] && error_exit "remote_drupal_pull_files requires LOCAL_MACHINE"
 [ -z "$LOCAL_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PATH"
