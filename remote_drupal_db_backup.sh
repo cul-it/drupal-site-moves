@@ -30,9 +30,9 @@ function rcmd () {
 }
 
 # set up remote backup directory
-rcmd "[ -d \"${REMOTE_SITE_MOVES_BACKUP_PATH}\" ] || mkdir -p \"${REMOTE_SITE_MOVES_BACKUP_PATH}\""
-rcmd "[ -d \"${REMOTE_SITE_MOVES_BACKUP_PATH}\" ] || echo 'make directory failed' && exit 1"
-rcmd "echo ${STAMP} > \"${REMOTE_TIMESTAMP_FILE}\" || echo 'write timestamp failed' && exit 1 "
+rcmd "[ -d ${REMOTE_SITE_MOVES_BACKUP_PATH} ] || mkdir -p ${REMOTE_SITE_MOVES_BACKUP_PATH}"
+rcmd "[ -d ${REMOTE_SITE_MOVES_BACKUP_PATH} ] || echo 'make directory failed' && exit 1"
+rcmd "echo ${STAMP} > ${REMOTE_TIMESTAMP_FILE} || echo 'write timestamp failed' && exit 1 "
 echo "...CHECK"
 
 message "backing up database" "  machine:  $REMOTE_MACHINE" "  site: $REMOTE_SITE_NAME" "  subsite: $SUBSITE" "  destination: $REMOTE_BACKUP_FILE.gz"
