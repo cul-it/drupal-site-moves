@@ -43,11 +43,13 @@ if [ "$LOCAL_IS_PRODUCTION_SERVER" -eq 1 ] ;then
   rsync -avcz -e "ssh -l $REMOTE_USER" --omit-dir-times --no-perms --no-times --chmod=ug=rwX \
     --exclude=sites/*/settings.php \
     --exclude=sites/all/* \
+    --exclude=.svn --exclude=.git \
     $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/ $LOCAL_PATH/ || error_exit "can't move site files"
 
   # but DO delete extra files in modules/libraries/themes
   rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX \
     --exclude=sites/*/settings.php \
+    --exclude=.svn --exclude=.git \
     $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_PATH/sites/all/ $LOCAL_PATH/sites/all/ || error_exit "can't move site files"
 else
     rsync -avcz -e "ssh -l $REMOTE_USER" --delete --omit-dir-times --no-perms --no-times --chmod=ug=rwX  \
