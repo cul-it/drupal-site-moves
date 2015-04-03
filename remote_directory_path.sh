@@ -21,6 +21,8 @@ REMOTE_MACHINE="$1"
 REMOTE_USER="$2"
 REMOTE_GROUP="$3"
 
+message "remote_directory_path creating path" "Machine: $REMOTE_MACHINE" "User: $REMOTE_USER" "User Group: $GROUP" "Path: $4"
+
 function rcmd () {
   SCRIPT="$1"
   /usr/bin/ssh "${REMOTE_USER}@${REMOTE_MACHINE}" "${SCRIPT}"
