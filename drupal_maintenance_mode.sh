@@ -14,11 +14,7 @@ function usage() {
   exit 1
 }
 
-# drush cc all clears some local variables, so do not use source to run this
-
-
 [ $# -eq 2 ] || usage "$0 needs 1 argument "
-
 
 case "$1" in
   'enter' ) SETTING=1
