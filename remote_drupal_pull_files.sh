@@ -80,8 +80,8 @@ rsync -avcz -e "ssh -l $REMOTE_USER"  --chmod=ug=rwX \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ || error_exit "can't move site backup files"
 
 #set permissions in target directory
-sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chown ${LOCAL_SITE_MOVES_DIRECTORY}"
-sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
+#sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chown ${LOCAL_SITE_MOVES_DIRECTORY}"
+#sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
 
 ls -alt "${LOCAL_SITE_MOVES_DIRECTORY}"
 
