@@ -78,7 +78,7 @@ ssh $REMOTE_USER@$REMOTE_MACHINE "test -d $REMOTE_SITE_MOVES_BACKUP_PATH"
 [ "$?" -eq 0 ] || error_exit "rsync borked"
 
 [ -d "${LOCAL_SITE_MOVES_BACKUP_PATH}" ] || error_exit 'directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
-rsync -avcz -e "ssh -l $REMOTE_USER"  \
+rsync -avcz -e "ssh -l $REMOTE_USER"  --chmod=ug=rwX \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ || error_exit "can't move site backup files"
 
 #debug - check directory still there after rsync
