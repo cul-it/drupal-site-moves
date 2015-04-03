@@ -10,7 +10,7 @@ source ${BASEDIR}/flow_functions.sh
 
 function usage() {
   message "usage:" "/bin/bash ${BASEDIR}/$0 <enter or exit> <path to site directory>" "  <enter or exit>
-  'enter' or 'exit'" "  <path to site directory> directory where the settings.php file for this site lives" "do not source, execute with ." "" "  $1"
+  'enter' or 'exit'" "  <path to site directory> directory where the settings.php file for this site lives" "do not source, execute with /bin/bash " "" "  $1"
   exit 1
 }
 
