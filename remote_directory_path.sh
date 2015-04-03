@@ -55,10 +55,10 @@ for d in "${DIRECTORIES[@]}"; do
       error_exit "can not make remote directory $PATH"
     else
       # set permissions on the directories we make
-      rcmd "chgrp ${REMOTE_GROUP} ${PATH}"
+      rcmd "chgrp ${REMOTE_GROUP} \"${PATH}\""
       group=$?
       [ "$group" -eq 0 ] || error_exit "can't set group of $PATH"
-      rcmd "chmod g+w ${PATH}"
+      rcmd "chmod g+w \"${PATH}\""
       mod=$?
       [ "$mod" -eq 0 ] || error_exit "can't set group write for $PATH"
     fi
