@@ -51,12 +51,17 @@ for d in "${DIRECTORIES[@]}"; do
     made=$?
     if [ "$made" -ne 0 ]; then
       error_exit "can not make remote directory $PATH"
+    else
+      # set permissions on the directories we make
+      rcmd "chgrp ${REMOTE_GROUP} ${PATH}"
+      group=$?
+      [ "$group" -eq 0 ] || error_exit "can't set group of $PATH"
+      rcmd "chmod g+w ${PATH}"
+      mod=$?
+      [ "$mod" -eq 0 ] || error_exit "can't set group write for $PATH"
     fi
   fi
-  rcmd "chgrp ${REMOTE_GROUP} ${PATH}"
-  group=$?
-  rcmd "chmod g+w ${PATH}"
-  mod=$?
 done
 
-rcmd "cd $4 ; cd ../ ; pwd ; ls -l"
+# display final directory
+rcmd "cd $PATH ; cd ../ ; pwd ; ls -l"
