@@ -33,6 +33,7 @@ function rcmd () {
 # set up remote backup directory
 BASEDIR=$(dirname $0)
 /bin/bash ${BASEDIR}/remote_directory_path.sh "$REMOTE_MACHINE" "$REMOTE_USER" "$REMOTE_USER_GROUP" "${REMOTE_SITE_MOVES_BACKUP_PATH}"
+[ "$?" -eq 0 ] || error_exit "remote_directory_path.sh failed"
 rcmd "echo ${STAMP} > ${REMOTE_TIMESTAMP_FILE} || echo 'write timestamp failed' && exit 1 "
 echo "...CHECK"
 
