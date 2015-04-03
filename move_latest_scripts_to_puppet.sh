@@ -54,7 +54,7 @@ do
   [ -f $foo ] && mv "$foo" "$PUPPET_SCRIPTS_DIR/" || error_exit "can't move $foo"
 done
 
-gits=(customize_robots_txt.sh drupal_site_permissions.sh find_who_runs_php.php flow_functions.sh local_drupal_db_restore.sh pull_site_from_production.sh pull_site_from_test.sh remote_drupal_db_backup.sh remote_drupal_pull_files.sh set_permissions.sh)
+gits=(customize_robots_txt.sh drupal_maintenance_mode.sh drupal_site_permissions.sh find_who_runs_php.php flow_functions.sh local_drupal_db_restore.sh pull_site_from_production.sh pull_site_from_test.sh remote_directory_path.sh remote_drupal_db_backup.sh remote_drupal_pull_files.sh set_permissions.sh)
 for file in "${gits[@]}"
 do
   foo="$GIT_MOVER_SCRIPTS_DIR/$file"
