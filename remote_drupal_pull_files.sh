@@ -20,6 +20,7 @@ message "remote_drupal_pull_files preflight"
 [ -z "$REMOTE_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PRIVATE_FILES_PATH"
 [ -z "$REMOTE_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires REMOTE_SITE_NAME"
 [ -z "$REMOTE_USER" ] && error_exit "remote_drupal_pull_files requires REMOTE_USER"
+[ -z "$REMOTE_USER_GROUP" ] && error_exit "remote_drupal_pull_files requires REMOTE_USER_GROUP"
 
 [ -d "$LOCAL_PATH" ] || error_exit "no directory for $LOCAL_PATH"
 [ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
