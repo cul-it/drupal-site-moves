@@ -76,6 +76,10 @@ message "moving database backup from" $REMOTE_SITE_MOVES_BACKUP_PATH "to" $LOCAL
 rsync -avcz -e "ssh -l $REMOTE_USER"  \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ || error_exit "can't move site backup files"
 
+#debug - check directory still there after rsync
+ssh $REMOTE_USER@$REMOTE_MACHINE "test -d $REMOTE_SITE_MOVES_BACKUP_PATH"
+[ "$?" -eq 0 ] || error_exit "rsync borked"
+
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 /bin/bash ${BASEDIR}/drupal_maintenance_mode.sh exit $LOCAL_PATH
 echo "...CHECK"
