@@ -83,7 +83,7 @@ rsync -avcz -e "ssh -l $REMOTE_USER"  --chmod=ug=rwX \
 sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chown ${LOCAL_SITE_MOVES_DIRECTORY}"
 sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
 
-error_exit "just set prms in ${LOCAL_SITE_MOVES_DIRECTORY}"
+ls -alt "${LOCAL_SITE_MOVES_DIRECTORY}"
 
 #debug - check local after rsync
 echo " testing $LOCAL_SITE_MOVES_BACKUP_PATH"
