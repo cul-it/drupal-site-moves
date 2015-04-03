@@ -11,13 +11,13 @@ message "local_drupal_db_restore preflight"
 [ -z "$LOCAL_PATH" ] && error_exit "local_drupal_db_restore requires REMOTE_PATH"
 [ -z "$LOCAL_MACHINE" ] && error_exit "local_drupal_db_restore requires REMOTE_MACHINE"
 [ -z "$LOCAL_USER" ] && error_exit "local_drupal_db_restore requires REMOTE_USER"
-[ -z "$LOCAL_BACKUP_PATH" ] && error_exit "local_drupal_db_restore requires REMOTE_BACKUP_PATH"
+[ -z "$LOCAL_SITE_MOVES_BACKUP_PATH" ] && error_exit "local_drupal_db_restore requires REMOTE_SITE_MOVES_BACKUP_PATH"
 [ -z "$STAMP" ] && error_exit "local_drupal_db_restore requires STAMP (time stamp)"
 [ -z "$LOCAL_SITE_NAME" ] && error_exit "local_drupal_db_restore requires REMOTE_SITE_NAME"
 [ -z "$SUBSITE" ] && SUBSITE=default
 
 LOCAL_SUBSITE_PATH="${LOCAL_PATH}/sites/$SUBSITE"
-LOCAL_BACKUP_FILE="${LOCAL_BACKUP_PATH}/dd_${SUBSITE}.sql.gz"
+LOCAL_BACKUP_FILE="${LOCAL_SITE_MOVES_BACKUP_PATH}/dd_${SUBSITE}.sql.gz"
 
 [ -d "$LOCAL_SUBSITE_PATH" ] || error_exit "no directory for $LOCAL_SUBSITE_PATH"
 [ -f "$LOCAL_BACKUP_FILE" ] || error_exit "no local backup file $LOCAL_BACKUP_FILE"
