@@ -34,7 +34,8 @@ function rcmd () {
 # remove leading slash from path so it won't genereate an array element
 PARTS=`echo "$4" | cut -c 2-`
 
-rcmd "mkdir -p $4"
+# make directories individually - not rcmd "mkdir -p $4"
+# so we can set permissions on new ones
 
 # make array of directories in path
 IFS="/" read -ra DIRECTORIES <<< "$PARTS"
