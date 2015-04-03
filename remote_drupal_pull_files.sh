@@ -8,12 +8,14 @@ remote_drupal_pull_files=1
 message "remote_drupal_pull_files preflight"
 
 [ -z "$LOCAL_SITE_MOVES_BACKUP_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_MOVES_BACKUP_PATH"
+[ -z "$LOCAL_SITE_MOVES_DIRECTORY" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_MOVES_DIRECTORY"
 [ -z "$LOCAL_IS_PRODUCTION_SERVER" ] && error_exit "remote_drupal_pull_files requires LOCAL_IS_PRODUCTION_SERVER"
 [ -z "$LOCAL_MACHINE" ] && error_exit "remote_drupal_pull_files requires LOCAL_MACHINE"
 [ -z "$LOCAL_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PATH"
 [ -z "$LOCAL_PRIVATE_FILES_PATH" ] && error_exit "remote_drupal_pull_files requires LOCAL_PRIVATE_FILES_PATH"
 [ -z "$LOCAL_SITE_NAME" ] && error_exit "remote_drupal_pull_files requires LOCAL_SITE_NAME"
 [ -z "$LOCAL_USER" ] && error_exit "remote_drupal_pull_files requires LOCAL_USER"
+[ -z "$LOCAL_USER_GROUP" ] && error_exit "remote_drupal_pull_files requires LOCAL_USER_GROUP"
 [ -z "$REMOTE_SITE_MOVES_BACKUP_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_SITE_MOVES_BACKUP_PATH"
 [ -z "$REMOTE_MACHINE" ] && error_exit "remote_drupal_pull_files requires REMOTE_MACHINE"
 [ -z "$REMOTE_PATH" ] && error_exit "remote_drupal_pull_files requires REMOTE_PATH"
@@ -73,17 +75,13 @@ echo "...CHECK"
 
 message "moving database backup from" $REMOTE_SITE_MOVES_BACKUP_PATH "to" $LOCAL_SITE_MOVES_BACKUP_PATH
 
-#debug - check directory still there after rsync
-ssh $REMOTE_USER@$REMOTE_MACHINE "test -d $REMOTE_SITE_MOVES_BACKUP_PATH"
-[ "$?" -eq 0 ] || error_exit "rsync borked"
-
 [ -d "${LOCAL_SITE_MOVES_BACKUP_PATH}" ] || error_exit 'directory $LOCAL_SITE_MOVES_BACKUP_PATH does not exist'
 rsync -avcz -e "ssh -l $REMOTE_USER"  --chmod=ug=rwX \
   $REMOTE_USER@$REMOTE_MACHINE:$REMOTE_SITE_MOVES_BACKUP_PATH/ $LOCAL_SITE_MOVES_BACKUP_PATH/ || error_exit "can't move site backup files"
 
-#debug - check directory still there after rsync
-ssh $REMOTE_USER@$REMOTE_MACHINE "test -d $REMOTE_SITE_MOVES_BACKUP_PATH"
-[ "$?" -eq 0 ] || error_exit "rsync borked"
+#set permissions in target directory
+sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${$LOCAL_SITE_MOVES_BACKUP_PATH}"
+sudo chmod -R ug=rwX,o=rX "${$LOCAL_SITE_MOVES_BACKUP_PATH}"
 
 #debug - check local after rsync
 echo " testing $LOCAL_SITE_MOVES_BACKUP_PATH"
