@@ -85,6 +85,10 @@ rsync -avcz -e "ssh -l $REMOTE_USER"  \
 ssh $REMOTE_USER@$REMOTE_MACHINE "test -d $REMOTE_SITE_MOVES_BACKUP_PATH"
 [ "$?" -eq 0 ] || error_exit "rsync borked"
 
+#debug - check local after rsync
+echo " testing $LOCAL_SITE_MOVES_BACKUP_PATH"
+test -d "$LOCAL_SITE_MOVES_BACKUP_PATH" || error_exit "$LOCAL_SITE_MOVES_BACKUP_PATH borked"
+
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
 /bin/bash ${BASEDIR}/drupal_maintenance_mode.sh exit $LOCAL_PATH
 echo "...CHECK"
