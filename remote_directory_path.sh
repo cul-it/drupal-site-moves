@@ -21,7 +21,7 @@ REMOTE_MACHINE="$1"
 REMOTE_USER="$2"
 REMOTE_GROUP="$3"
 
-message "remote_directory_path creating path" "Machine: $REMOTE_MACHINE" "User: $REMOTE_USER" "User Group: $GROUP" "Path: $4"
+message "remote_directory_path creating path" "Machine: $REMOTE_MACHINE" "User: $REMOTE_USER" "User Group: $REMOTE_GROUP" "Path: $4"
 
 function rcmd () {
   SCRIPT="$1"
@@ -67,3 +67,5 @@ done
 
 # display final directory
 rcmd "cd $PATH ; cd ../ ; pwd ; ls -l"
+
+message "remote_directory_path complete"
