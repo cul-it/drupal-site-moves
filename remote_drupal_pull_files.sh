@@ -28,8 +28,10 @@ message "remote_drupal_pull_files preflight"
 [ -d "$LOCAL_PRIVATE_FILES_PATH" ] || error_exit "no directory for $LOCAL_PRIVATE_FILES_PATH"
 
 # set up local backup directory
-mkdir -pv "$LOCAL_SITE_MOVES_BACKUP_PATH"
+sudo mkdir -pv "$LOCAL_SITE_MOVES_BACKUP_PATH"
 [ -d "$LOCAL_SITE_MOVES_BACKUP_PATH" ] || error_exit "make directory $LOCAL_SITE_MOVES_BACKUP_PATH failed"
+#sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chown ${LOCAL_SITE_MOVES_DIRECTORY}"
+#sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
 
 echo "...CHECK"
 
