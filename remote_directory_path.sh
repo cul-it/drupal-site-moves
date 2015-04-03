@@ -48,7 +48,6 @@ for d in "${DIRECTORIES[@]}"; do
   rcmd "test -d \"${PATH}\""
   found=$?
   if [ "$found" -ne 0 ]; then
-    echo "path $PATH does not exist"
     rcmd "mkdir \"${PATH}\""
     made=$?
     if [ "$made" -ne 0 ]; then
