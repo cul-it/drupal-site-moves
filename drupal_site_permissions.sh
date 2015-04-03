@@ -23,7 +23,7 @@ FINAL_USER_PHP=$LOCAL_USER_PHP
 
 message "User: $FINAL_USER" "Group: $FINAL_GROUP" "PHP user: $FINAL_USER_PHP"
 
-sudo echo "Site: $LOCAL_PATH"
+echo "Site: $LOCAL_PATH"
 
 cd "$LOCAL_PATH" || error_exit "cd $LOCAL_PATH failed"
 sudo chown -R $FINAL_USER:$FINAL_GROUP .
@@ -57,7 +57,8 @@ sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
 
 # exception for the files the mover scripts need to read/write from other machines
 cd "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "cd $LOCAL_SITE_MOVES_DIRECTORY failed"
-sudo find . -type f -exec chmod u=rw,g=rw,o= '{}' \;
+sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chown ${LOCAL_SITE_MOVES_DIRECTORY}"
+sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
 
 # settings.php should not be writable
 for d in $LOCAL_PATH/sites/*/settings.php
