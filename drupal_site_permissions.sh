@@ -40,6 +40,7 @@ do
   [ -d "${d}" ] || error_exit "$d is not a directory"
   sudo find $d -type d -exec chmod ug=rwx,o= '{}' \;
   sudo find $d -type f -exec chmod ug=rw,o= '{}' \;
+  sudo find $d -type f -exec chgrp "$FINAL_GROUP" '{}' \;
 done
 
 # sites/all/<modules,themes,libraries> writable by group if this is a test server (.git and .svn)
