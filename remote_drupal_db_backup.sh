@@ -40,10 +40,10 @@ echo "...CHECK"
 message "backing up database" "  machine:  $REMOTE_MACHINE" "  site: $REMOTE_SITE_NAME" "  subsite: $SUBSITE" "  destination: $REMOTE_BACKUP_FILE.gz"
 
 rcmd "[ -f \"${REMOTE_BACKUP_FILE}.gz\" ] && rm \"${REMOTE_BACKUP_FILE}.gz\""
-rcmd "drush --root=$REMOTE_PATH vset maintenance_mode 1 "
+rcmd "drush --root=$REMOTE_PATH vset --yes maintenance_mode 1 "
 rcmd "drush --root=$REMOTE_PATH cc all "
 rcmd "drush --root=$REMOTE_PATH sql-dump --gzip --result-file=\"$REMOTE_BACKUP_FILE\""
-rcmd "drush --root=$REMOTE_PATH vset maintenance_mode 0 "
+rcmd "drush --root=$REMOTE_PATH vset --yes maintenance_mode 0 "
 rcmd "drush --root=$REMOTE_PATH cc all "
 
 REMOTE_BACKUP_FILE=${REMOTE_BACKUP_FILE}.gz
