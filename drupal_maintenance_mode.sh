@@ -28,5 +28,5 @@ esac
 [ -d "$2" ] || usage "Second argument must be an existing directory"
 
 cd "$2" || error_exit "can not change directory to $2"
-drush vset maintenance_mode "$SETTING" || error_exit "drush vset maintenance_mode failed"
+drush vset --yes maintenance_mode "$SETTING" || error_exit "drush vset maintenance_mode failed"
 drush cc all || error_exit "drush cache clear failed"
