@@ -46,6 +46,11 @@ sudo echo "Thanks."
 message "Hello $LOCAL_USER." "This will set all the file ownership and permissions on" $LOCAL_SITE_NAME
 ConfirmOrExit
 
+# set up the local work area for pull_site_from_production or pull_site_from_test
+sudo mkdir -p "$LOCAL_SITE_MOVES_AREA"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_AREA"
+sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SITE_MOVES_AREA"
+
 source ${SCRIPTPATH}/drupal_site_permissions.sh
 
 message "set_permissions complete" "have a nice day."
