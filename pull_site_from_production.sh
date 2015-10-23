@@ -55,6 +55,9 @@ VICTORIA03=victoria03.library.cornell.edu
 
 # check site arguments
 case "$REMOTE_SITE_NAME" in
+  "goldsen.library.cornell.edu")
+    usage "goldsen site has a special move script"
+    ;;
   "www.library.cornell.edu" | "beta.library.cornell.edu")
     REMOTE_MACHINE=$VICTORIA03
     ;;
