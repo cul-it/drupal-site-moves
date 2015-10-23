@@ -13,7 +13,7 @@ REMOTE_MACHINE=victoria02.library.cornell.edu
 REMOTE_SITE_NAME=$1
 REMOTE_PATH=/libweb/sites/${REMOTE_SITE_NAME}/htdocs
 REMOTE_PRIVATE_FILES_PATH=/libweb/sites/${REMOTE_SITE_NAME}/drupal_files
-REMOTE_SITE_MOVES_AREA=/tmp/drupal-site-moves/${REMOTE_SITE_NAME}
+REMOTE_SITE_MOVES_AREA=/tmp/drupal-site-moves/${USER}/${REMOTE_SITE_NAME}
 REMOTE_SITE_MOVES_DIRECTORY=${REMOTE_SITE_MOVES_AREA}/${REMOTE_USER}
 REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 REMOTE_USER_GROUP=lib_web_dev_role
@@ -23,7 +23,7 @@ LOCAL_MACHINE=victoria01.serverfarm.cornell.edu
 LOCAL_SITE_NAME=$2
 LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
-LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${LOCAL_SITE_NAME}
+LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${USER}/${LOCAL_SITE_NAME}
 LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}/${LOCAL_USER}
 LOCAL_SITE_MOVES_BACKUP_PATH=${LOCAL_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 LOCAL_USER_GROUP=lib_web_dev_role
@@ -55,6 +55,9 @@ VICTORIA03=victoria03.library.cornell.edu
 
 # check site arguments
 case "$LOCAL_SITE_NAME" in
+  "goldsen.library.cornell.edu")
+    usage "goldsen site has a special move script"
+    ;;
   "www.library.cornell.edu" | "beta.library.cornell.edu")
     LOCAL_MACHINE=$VICTORIA03
     ;;
