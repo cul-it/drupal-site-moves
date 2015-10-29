@@ -97,10 +97,18 @@ else
   ConfirmOrExit
 fi
 
-# set up the work area for this script
+# set up the local tmp file directoruy for all users of this script
 sudo mkdir -p "$LOCAL_SCRIPT_TMP_DIRECTORY"
-sudo chgrp "$LOCAL_USER_GROUP" "$LOCAL_SCRIPT_TMP_DIRECTORY"
-sudo chmod ug=rwX,o=rX "$LOCAL_SCRIPT_TMP_DIRECTORY"
+sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SCRIPT_TMP_DIRECTORY"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SCRIPT_TMP_DIRECTORY"
+# set up remote tmp file directory
+BASEDIR=$(dirname $0)
+/bin/bash ${BASEDIR}/remote_directory_path.sh "$REMOTE_MACHINE" "$REMOTE_USER" "$REMOTE_USER_GROUP" "${REMOTE_SCRIPT_TMP_DIRECTORY}"
+[ "$?" -eq 0 ] || error_exit "remote_directory_path.sh failed"
+usage 'stop here'
+
+
+# set up the work area for this script
 sudo mkdir -p "$LOCAL_SITE_MOVES_AREA"
 sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_AREA"
 sudo chown -R "${LOCAL_USER}:${LOCAL_USER_GROUP}" "$LOCAL_SITE_MOVES_USER_DIRECTORY"
