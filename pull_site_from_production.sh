@@ -97,6 +97,9 @@ else
 fi
 
 # set up the work area for this script
+sudo mkdir -p "$LOCAL_SCRIPT_TMP_DIRECTORY"
+sudo chgrp "$LOCAL_USER_GROUP" "$LOCAL_SCRIPT_TMP_DIRECTORY"
+sudo chmod ug=rwX,o=rX "$LOCAL_SCRIPT_TMP_DIRECTORY"
 sudo mkdir -p "$LOCAL_SITE_MOVES_AREA"
 sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_AREA"
 sudo chown -R "${LOCAL_USER}:${LOCAL_USER_GROUP}" "$LOCAL_SITE_MOVES_USER_DIRECTORY"
