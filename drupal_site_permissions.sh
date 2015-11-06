@@ -54,7 +54,7 @@ echo "Private Files: $LOCAL_PRIVATE_FILES_PATH"
 cd "$LOCAL_PRIVATE_FILES_PATH" || error_exit "cd $LOCAL_PRIVATE_FILES_PATH failed"
 sudo chown -R $FINAL_USER_PHP:$FINAL_GROUP .
 sudo find . -type d -name files -exec chmod ug=rwx,o= '{}' \;
-sudo find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+sudo find . -type f -exec chmod ug=rw,o= '{}' \;
 
 # exception for the files the mover scripts need to read/write from other machines
 cd "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "cd $LOCAL_SITE_MOVES_DIRECTORY failed"
