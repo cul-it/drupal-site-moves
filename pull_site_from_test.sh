@@ -120,4 +120,4 @@ source ${SCRIPTPATH}/customize_robots_txt.sh
 
 source ${SCRIPTPATH}/drupal_site_permissions.sh
 
-message "pull_site_from_production complete" "have a nice day."
+message "pull_site_from_test complete" "have a nice day."
