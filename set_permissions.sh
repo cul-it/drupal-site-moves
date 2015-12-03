@@ -47,9 +47,9 @@ message "Hello $LOCAL_USER." "This will set all the file ownership and permissio
 ConfirmOrExit
 
 # set up the local work area for pull_site_from_production or pull_site_from_test
-sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY"
-sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_DIRECTORY"
-sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SITE_MOVES_DIRECTORY"
+sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't make directory $LOCAL_SITE_MOVES_DIRECTORY"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't chmod directory $LOCAL_SITE_MOVES_DIRECTORY"
+sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't chgrp directory $LOCAL_SITE_MOVES_DIRECTORY"
 
 source ${SCRIPTPATH}/drupal_site_permissions.sh
 
