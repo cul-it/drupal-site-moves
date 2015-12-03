@@ -12,8 +12,8 @@ LOCAL_USER=$USER
 LOCAL_SITE_NAME=$1
 LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
-LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${LOCAL_SITE_NAME}
-LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}/${LOCAL_USER}
+LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${LOCAL_USER}/${LOCAL_SITE_NAME}
+LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_USER_GROUP=lib_web_dev_role
 LOCAL_USER_PHP=apache
 
@@ -47,9 +47,9 @@ message "Hello $LOCAL_USER." "This will set all the file ownership and permissio
 ConfirmOrExit
 
 # set up the local work area for pull_site_from_production or pull_site_from_test
-sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY"
-sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_DIRECTORY"
-sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SITE_MOVES_DIRECTORY"
+sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't make directory $LOCAL_SITE_MOVES_DIRECTORY"
+sudo chmod -R ug=rwX,o=rX "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't chmod directory $LOCAL_SITE_MOVES_DIRECTORY"
+sudo chgrp -R "$LOCAL_USER_GROUP" "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't chgrp directory $LOCAL_SITE_MOVES_DIRECTORY"
 
 source ${SCRIPTPATH}/drupal_site_permissions.sh
 
