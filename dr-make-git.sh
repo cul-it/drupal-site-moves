@@ -1,7 +1,7 @@
 #!/bin/bash
 # dr-make-git.sh - drush make for Drupal sites on victoria02
 #
-# sudo ./dr-make.sh <alias> [<sitegroup>]
+# sudo ./dr-make-git.sh <alias> [<sitegroup>]
 #	where <alias> is an alias from etc/drush/ (with the @ prefix)
 #	and [<sitegroup>] is an optional argument - if present it becomes sitegroup
 #
