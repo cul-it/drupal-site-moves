@@ -91,6 +91,7 @@ echo "*******************"
 echo "*******************"
 echo "grab the latest drush make file from git"
 echo "*******************"
+pushd $sitedir/$sitename/make
 git checkout master
 if [ "$?" -ne "0" ]; then
 	error_exit "couldn't checkout the master branch from git $sitename"
@@ -99,6 +100,7 @@ git pull
 if [ "$?" -ne "0" ]; then
 	error_exit "couldn't do git pull $sitename"
 fi
+popd
 
 # check for configuration file in with make file
 # example file:
