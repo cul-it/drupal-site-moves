@@ -1,5 +1,5 @@
 #!/bin/bash
-# dr-make.sh - drush make for Drupal sites
+# dr-make-git.sh - drush make for Drupal sites on victoria02
 #
 # sudo ./dr-make.sh <alias> [<sitegroup>]
 #	where <alias> is an alias from etc/drush/ (with the @ prefix)
@@ -91,9 +91,13 @@ echo "site name: $sitename"
 echo "*******************"
 
 echo "*******************"
-echo "grab the latest drush make file from svn"
+echo "grab the latest drush make file from git"
 echo "*******************"
-svn up $sitename
+git checkout master
+f [ "$?" -ne "0" ]; then
+	error_exit "couldn't checkout the master branch from git $sitename"
+fi
+git pull
 if [ "$?" -ne "0" ]; then
 	error_exit "couldn't do svn up $sitename"
 fi
