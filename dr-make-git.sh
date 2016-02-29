@@ -97,7 +97,7 @@ if [ "$?" -ne "0" ]; then
 fi
 git pull
 if [ "$?" -ne "0" ]; then
-	error_exit "couldn't do svn up $sitename"
+	error_exit "couldn't do git pull $sitename"
 fi
 
 # check for configuration file in with make file
