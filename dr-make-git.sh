@@ -5,10 +5,6 @@
 #	where <alias> is an alias from etc/drush/ (with the @ prefix)
 #	and [<sitegroup>] is an optional argument - if present it becomes sitegroup
 #
-### svn:keyword $Date: 2015-03-26 19:03:45 -0400 (Thu, 26 Mar 2015) $
-### svn:keyword $Author: jgr25 $
-### svn:keyword $Rev: 3186 $
-### svn:keyword $URL: https://svn.library.cornell.edu/cul-drupal/scripts/dr-make.sh $
 # Global vars
 sitedir="/libweb/sites"
 sitegroup="lib_web_dev_role"
