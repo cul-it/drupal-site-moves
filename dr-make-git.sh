@@ -1,5 +1,7 @@
 #!/bin/bash
 # dr-make-git.sh - drush make for Drupal sites on victoria02
+# assumes /libweb/sites/<domain>/make/<domain> is a git repo with
+# a drush make file in it named drush.make
 #
 # sudo ./dr-make-git.sh <alias> [<sitegroup>]
 #	where <alias> is an alias from etc/drush/ (with the @ prefix)
@@ -154,14 +156,14 @@ then
 	fi
 	update=0
 	#make the new version with a installable default directory
-	drush make --prepare-install --working-copy $sitename/$sitename.make target
+	drush make --prepare-install --working-copy $sitename/drush.make target
 	if [ "$?" -ne "0" ]; then
 		error_exit "couldn't drush make new site"
 	fi
 else
 	update=1
 	#make the new version of the site
-	drush make --working-copy $sitename/$sitename.make target
+	drush make --working-copy $sitename/drush.make target
 	if [ "$?" -ne "0" ]; then
 		error_exit "drush make didn't work"
 	fi
