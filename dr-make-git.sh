@@ -46,7 +46,7 @@ fi
 # /libweb/sites/[sitename]/make/[sitename]/[sitename].make
 # assumes you are here .....^
 sitename=`echo ${PWD#/libweb/sites/} | cut -d "/" -f1`
-makefile="$sitename/$sitename.make"
+makefile="$sitename/drush.make"
 echo ".make file = $makefile"
 echo "sitename = $sitename"
 if [ -z "$sitename" ]; then
