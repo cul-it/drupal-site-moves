@@ -92,7 +92,7 @@ echo "*******************"
 echo "*******************"
 echo "grab the latest drush make file from git"
 echo "*******************"
-pushd $sitedir/$sitename/make
+pushd $sitedir/$sitename/make/$sitename
 git checkout master
 if [ "$?" -ne "0" ]; then
 	error_exit "couldn't checkout the master branch from git $sitename"
