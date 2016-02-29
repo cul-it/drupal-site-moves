@@ -92,7 +92,7 @@ echo "*******************"
 echo "grab the latest drush make file from git"
 echo "*******************"
 git checkout master
-f [ "$?" -ne "0" ]; then
+if [ "$?" -ne "0" ]; then
 	error_exit "couldn't checkout the master branch from git $sitename"
 fi
 git pull
