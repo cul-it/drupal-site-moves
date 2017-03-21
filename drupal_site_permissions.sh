@@ -79,6 +79,9 @@ do
   sudo chmod ug=rw,o= "${d}"
   sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
   ls -l "${d}"
+  DIR=$(dirname "${DIR}")
+  sudo chmod g+w "${DIR}"
+  ls -l "${DIR}"
 done
 
 message "drupal_site_permissions complete"
