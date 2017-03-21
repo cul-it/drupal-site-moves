@@ -71,4 +71,14 @@ do
   ls -l "${d}"
 done
 
+# settings.local.php should be group writable
+for d in $LOCAL_PATH/sites/*/settings.local.php
+do
+  echo "Settings Local: ${d}"
+  [ -f "${d}" ] || error_exit "$d is not a file"
+  sudo chmod ug=rw,o= "${d}"
+  sudo chown $FINAL_USER_PHP:$FINAL_GROUP "${d}"
+  ls -l "${d}"
+done
+
 message "drupal_site_permissions complete"
