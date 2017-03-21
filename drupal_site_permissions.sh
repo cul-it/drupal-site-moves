@@ -81,7 +81,7 @@ do
   ls -l "${d}"
   sites_default=$(dirname "${d}")
   sudo chmod g+w "${sites_default}"
-  ls -l "${sites_default}"
+  ls -ld "${sites_default}"
 done
 
 message "drupal_site_permissions complete"
