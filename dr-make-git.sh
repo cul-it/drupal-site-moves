@@ -25,6 +25,17 @@ drush --version
 
 # An error exit function
 
+function error_show
+{
+	pwd
+	echo "*******************      *******************"
+	echo "*******************      *******************"
+	echo "*******************      *******************"
+	echo "$1" 1>&2
+	echo "*******************"
+	echo "*******************"
+}
+
 function error_exit
 {
 	pwd
