@@ -234,23 +234,6 @@ then
 	sudo chown -Rh $phprunner:$sitegroup target/sites/default/image_import
 fi
 
-if [ -d target/sites/all/libraries/tinymce ]
-then
-	# be sure the download from the 'latest version' link actually produced a file
-	echo "*******************"
-	echo "checking tinymce"
-	echo "*******************"
-	if [ -a target/sites/all/libraries/tinymce/jscripts/tiny_mce/tiny_mce.js ]
-	then
-		ls target/sites/all/libraries/tinymce/jscripts/tiny_mce/
-	elif [ -a target/sites/all/libraries/tinymce/js/tinymce/tinymce.min.js ]
-		then
-		ls target/sites/all/libraries/tinymce/js/tinymce/
-	else
-		error_exit "tinyMCE download did not work"
-	fi
-fi
-
 # find out where contributed modules are stored
 if [ -d target/sites/all/modules/contributed ]
 then
