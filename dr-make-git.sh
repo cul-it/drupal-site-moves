@@ -518,6 +518,11 @@ then
 		ls target/sites/all/libraries/tinymce/js/tinymce/
 	else
 		error_show "tinyMCE download did not work"
+		echo "Download TinyMCE Community version here:"
+		echo "https://www.tinymce.com/download/"
+		echo "cd ../htdocs/sites/all/libraries"
+		echo "curl -O http://download.ephox.com/tinymce/community/tinymce_4.6.4.zip"
+		echo "unzip tinymce_4.6.4.zip"
 	fi
 fi
 
