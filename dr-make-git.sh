@@ -25,6 +25,17 @@ drush --version
 
 # An error exit function
 
+function error_show
+{
+	pwd
+	echo "*******************      *******************"
+	echo "*******************      *******************"
+	echo "*******************      *******************"
+	echo "$1" 1>&2
+	echo "*******************"
+	echo "*******************"
+}
+
 function error_exit
 {
 	pwd
@@ -221,23 +232,6 @@ if [ -d target/sites/default/image_import ]
 then
 	# chown needs sudo
 	sudo chown -Rh $phprunner:$sitegroup target/sites/default/image_import
-fi
-
-if [ -d target/sites/all/libraries/tinymce ]
-then
-	# be sure the download from the 'latest version' link actually produced a file
-	echo "*******************"
-	echo "checking tinymce"
-	echo "*******************"
-	if [ -a target/sites/all/libraries/tinymce/jscripts/tiny_mce/tiny_mce.js ]
-	then
-		ls target/sites/all/libraries/tinymce/jscripts/tiny_mce/
-	elif [ -a target/sites/all/libraries/tinymce/js/tinymce/tinymce.min.js ]
-		then
-		ls target/sites/all/libraries/tinymce/js/tinymce/
-	else
-		error_exit "tinyMCE download did not work"
-	fi
 fi
 
 # find out where contributed modules are stored
@@ -509,6 +503,24 @@ then
 	drush $alias vset --always-set maintenance_mode 0
 	drush cache-clear all
 fi
+
+if [ -d target/sites/all/libraries/tinymce ]
+then
+	# be sure the download from the 'latest version' link actually produced a file
+	echo "*******************"
+	echo "checking tinymce"
+	echo "*******************"
+	if [ -a target/sites/all/libraries/tinymce/jscripts/tiny_mce/tiny_mce.js ]
+	then
+		ls target/sites/all/libraries/tinymce/jscripts/tiny_mce/
+	elif [ -a target/sites/all/libraries/tinymce/js/tinymce/tinymce.min.js ]
+		then
+		ls target/sites/all/libraries/tinymce/js/tinymce/
+	else
+		error_show "tinyMCE download did not work"
+	fi
+fi
+
 
 echo "*******************"
 echo "Done."
