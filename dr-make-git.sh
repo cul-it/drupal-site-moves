@@ -170,7 +170,7 @@ then
 	fi
 	update=0
 	#make the new version with a installable default directory
-	drush make --prepare-install --working-copy $sitename/drush.make target
+	drush make --prepare-install --working-copy --download-mechanism=curl $sitename/drush.make target
 	if [ "$?" -ne "0" ]; then
 		error_exit "couldn't drush make new site"
 	fi
