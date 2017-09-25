@@ -11,7 +11,7 @@ filename=$(basename $0)
 SCRIPT_ID="${filename%.*}"
 
 LOCAL_SITE_NAME=$1
-LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
+LOCAL_PATH=/cul/web/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
 LOCAL_SITE_MOVES_DIRECTORY=/libweb/drupal/backups/${LOCAL_SITE_NAME}/drupal-site-moves/${LOCAL_USER}
 LOCAL_USER=$USER
