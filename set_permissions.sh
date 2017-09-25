@@ -29,7 +29,7 @@ function usage() {
 
 # $HOSTNAME on the servers
 VICTORIA01=victoria01.serverfarm.cornell.edu
-VICTORIA02=jgr25-dev.library.cornell.edu
+VICTORIA02=lib-dev-037.serverfarm.cornell.edu
 VICTORIA03=victoria03.library.cornell.edu
 
 # use 0 for test server 1 for production server

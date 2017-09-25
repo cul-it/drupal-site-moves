@@ -20,7 +20,7 @@ REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 REMOTE_USER_GROUP=lib_web_dev_role
 
 LOCAL_USER=$USER
-LOCAL_MACHINE=jgr25-dev.library.cornell.edu
+LOCAL_MACHINE=lib-dev-037.serverfarm.cornell.edu
 LOCAL_SITE_NAME=$2
 LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
