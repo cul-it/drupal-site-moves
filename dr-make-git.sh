@@ -8,7 +8,7 @@
 #	and [<sitegroup>] is an optional argument - if present it becomes sitegroup
 #
 # Global vars
-sitedir="/libweb/sites"
+sitedir="/cul/web"
 sitegroup="lib_web_dev_role"
 # on artslib user:group is webmstr:diglibdev-role
 # on copia user:group is jgr25:webmstr
