@@ -53,7 +53,7 @@ function usage() {
 
 # $HOSTNAME on the servers
 VICTORIA01=victoria01.serverfarm.cornell.edu
-VICTORIA02=victoria02.serverfarm.cornell.edu
+VICTORIA02=lib-dev-037.serverfarm.cornell.edu
 VICTORIA03=victoria03.library.cornell.edu
 
 # check site arguments
