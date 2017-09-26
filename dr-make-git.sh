@@ -55,9 +55,9 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # try to find alias without argument using standard directory layout
-# /libweb/sites/[sitename]/make/[sitename]/[sitename].make
+# /cul/web/[sitename]/make/[sitename]/[sitename].make
 # assumes you are here .....^
-sitename=`echo ${PWD#/libweb/sites/} | cut -d "/" -f1`
+sitename=`echo ${PWD#/cul/web/} | cut -d "/" -f1`
 makefile="$sitename/drush.make"
 echo ".make file = $makefile"
 echo "sitename = $sitename"
