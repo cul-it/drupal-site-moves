@@ -92,8 +92,9 @@ else
 	alias+=$sitename
 
 	# test the alias
-	sitename2=`drush site-alias --component=uri "$alias"`
-	[[ -n "$sitename2" ]] || error_exit "$alias is not a valid alias"
+	drush drupal-directory -q "$alias" || error_exit "$alias is not a valid alias"
+	# sitename2=`drush site-alias --component=uri "$alias"`
+	# [[ -n "$sitename2" ]] || error_exit "$alias is not a valid alias"
 fi
 
 echo "*******************"
