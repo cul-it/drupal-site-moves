@@ -71,10 +71,9 @@ if [ -z "$sitename" ]; then
 	fi
 
 	# first argument should be an alias
-	sitename=`drush site-alias --component=uri "$1"`
-	[[ -n "$sitename" ]] || error_exit "$1 is not a valid alias"
-
 	alias="$1"
+	drush drupal-directory -q "$alias" || error_exit "$alias is not a valid alias"
+	sitename=$(echo $alias | cut -d'@' -f 2)
 
 	# optional second argument is sitegroup
 	if [ $# -eq 2 ]; then
