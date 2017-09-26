@@ -163,7 +163,7 @@ fi
 echo "*******************"
 echo "making new working copy of $sitename"
 echo "*******************"
-INSTALLED=`drush --root=$DRUPALSITESPATH --pipe status | grep 'drupal_bootstrap=Successful'`
+INSTALLED=`drush --root=$DRUPALSITESPATH --fields=bootstrap status | grep 'Successful'`
 if [ -z "$INSTALLED" ]
 then
 	# drupal is not installed in this site - check if something else is wrong
