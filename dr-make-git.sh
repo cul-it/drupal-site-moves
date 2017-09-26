@@ -141,6 +141,9 @@ fi
 
 # supply defaults for anything that might be in the configuration file
 DRUPALSITESPATH=${DRUPALSITESPATH:-"$sitedir/$sitename/htdocs"}
+echo "*******************"
+echo "DRUPALSITESPATH = $DRUPALSITESPATH"
+echo "*******************"
 
 #remove the old build - sudo
 if [ -d target ]
