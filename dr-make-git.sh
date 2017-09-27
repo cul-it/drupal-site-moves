@@ -22,6 +22,11 @@ filesuser=$USER
 # sudo just to get the password thing over with
 sudo echo "Thanks for that. Some things here have to use sudo and others must not."
 
+# get path to current script
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+popd > /dev/null
+
 drush --version
 
 # An error exit function
