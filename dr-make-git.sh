@@ -475,6 +475,9 @@ echo "making a restrictive robots.txt file"
 echo "*******************"
 echo -e 'User-agent: *\nDisallow: /' > target/robots.txt
 
+echo "*******************"
+echo "setting permissions for settings.php"
+echo "*******************"
 if [ $update -eq 0 ]
 then
 	# Drupal will complain during install if it can't write to the settings.php file
@@ -535,6 +538,10 @@ then
 	fi
 fi
 
+echo "*******************"
+echo "set permissions for everything in $sitename"
+echo "*******************"
+source ${SCRIPTPATH}/set_permissions.sh "$sitename"
 
 echo "*******************"
 echo "Done."
