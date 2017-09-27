@@ -425,14 +425,14 @@ then
 fi
 
 echo "*******************"
-echo "cleaning up .htaccess files"
+echo " NOT cleaning up .htaccess files"
 echo "*******************"
 
-if [ -a target/.htaccess ]
-then
-	#server configuration handles this!
-	rm -f target/.htaccess
-fi
+# if [ -a target/.htaccess ]
+# then
+# 	#server configuration handles this!
+# 	rm -f target/.htaccess
+# fi
 
 # now puppet configuration handles .htaccess files in
 # sites/default/files
