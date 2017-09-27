@@ -1,6 +1,6 @@
 #!/bin/bash
-# dr-make-git.sh - drush make for Drupal sites on victoria02
-# assumes /libweb/sites/<domain>/make/<domain> is a git repo with
+# dr-make-git.sh - drush make for Drupal sites on jgr25-dev
+# assumes /cul/web/<domain>/make/<domain> is a git repo with
 # a drush make file in it named drush.make
 #
 # sudo ./dr-make-git.sh <alias> [<sitegroup>]
@@ -9,11 +9,12 @@
 #
 # Global vars
 sitedir="/cul/web"
-sitegroup="lib_web_dev_role"
+sitegroup="diglibdev-role"
 # on artslib user:group is webmstr:diglibdev-role
 # on copia user:group is jgr25:webmstr
 # on libdev user:group is jgr25:nobody
 # on victoria02 user:group is jgr25:apache
+# on jgr25-dev user:group is jgr25:diglibdev-role
 # apache is both a user and a group
 phprunner="apache"
 filesuser=$USER
