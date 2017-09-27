@@ -8,16 +8,18 @@ popd > /dev/null
 filename=$(basename $0)
 SCRIPT_ID="${filename%.*}"
 
+JGR25DEV=lib-dev-037.serverfarm.cornell.edu
+
 REMOTE_USER=$USER
-REMOTE_MACHINE=victoria02.library.cornell.edu
+REMOTE_MACHINE="$JGR25DEV"
 REMOTE_SITE_NAME=$1
-REMOTE_PATH=/libweb/sites/${REMOTE_SITE_NAME}/htdocs
-REMOTE_PRIVATE_FILES_PATH=/libweb/sites/${REMOTE_SITE_NAME}/drupal_files
+REMOTE_PATH=/cul/web/${REMOTE_SITE_NAME}/htdocs
+REMOTE_PRIVATE_FILES_PATH=/cul/web/${REMOTE_SITE_NAME}/drupal_files
 REMOTE_SCRIPT_TMP_DIRECTORY=/tmp/drupal-site-moves
 REMOTE_SITE_MOVES_AREA=${REMOTE_SCRIPT_TMP_DIRECTORY}/${USER}/${REMOTE_SITE_NAME}
 REMOTE_SITE_MOVES_DIRECTORY=${REMOTE_SITE_MOVES_AREA}
 REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
-REMOTE_USER_GROUP=lib_web_dev_role
+REMOTE_USER_GROUP=diglibdev-role
 
 LOCAL_USER=$USER
 LOCAL_MACHINE=victoria01.serverfarm.cornell.edu
@@ -76,7 +78,7 @@ fi
 # use 0 for test server 1 for production server
 case "$HOSTNAME" in
   "$VICTORIA01" | "$VICTORIA03") LOCAL_IS_PRODUCTION_SERVER=1 ;;
-  "$VICTORIA02") LOCAL_IS_PRODUCTION_SERVER=0 ;;
+  "$VICTORIA02" | "$JGR25DEV" ) LOCAL_IS_PRODUCTION_SERVER=0 ;;
   *) error_exit "Unexpected hostname $HOSTNAME" ;;
 esac
 
