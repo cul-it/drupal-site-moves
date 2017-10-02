@@ -6,4 +6,5 @@ case "$HOSTNAME" in
     ;;
 esac
 
+echo "Looking for drush"
 which drush || exit 1
