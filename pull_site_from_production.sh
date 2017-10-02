@@ -41,6 +41,8 @@ SUBSITES=(default )
 #*********************************************
 #*********************************************
 
+source ${SCRIPTPATH}/find_drush.sh
+
 BASEDIR=$(dirname $0)
 source ${BASEDIR}/flow_functions.sh
 
