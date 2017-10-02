@@ -66,6 +66,9 @@ case "$LOCAL_SITE_NAME" in
   "www.library.cornell.edu" | "beta.library.cornell.edu")
     LOCAL_MACHINE=$VICTORIA03
     ;;
+  "temporary.test2.library.cornell.edu")
+    LOCAL_MACHINE=$VICTORIA02
+    ;;
   *)
     LOCAL_MACHINE=$VICTORIA01
 esac
