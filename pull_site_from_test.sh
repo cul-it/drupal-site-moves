@@ -22,7 +22,7 @@ REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 REMOTE_USER_GROUP=diglibdev-role
 
 LOCAL_USER=$USER
-LOCAL_MACHINE=victoria01.serverfarm.cornell.edu
+LOCAL_MACHINE=victoria02.serverfarm.cornell.edu
 LOCAL_SITE_NAME=$2
 LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
