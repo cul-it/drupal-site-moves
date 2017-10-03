@@ -117,6 +117,7 @@ sudo chown -R "${LOCAL_USER}:${LOCAL_USER_GROUP}" "$LOCAL_SITE_MOVES_USER_DIRECT
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
 
+set -x
 source ${SCRIPTPATH}/remote_drupal_db_backup.sh
 
 source ${SCRIPTPATH}/remote_drupal_pull_files.sh
