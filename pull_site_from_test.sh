@@ -34,7 +34,7 @@ LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_SITE_MOVES_BACKUP_PATH=${LOCAL_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 LOCAL_USER_GROUP=lib_web_dev_role
 LOCAL_USER_PHP=apache
-LOCAL_DRUSH=usr/local/bin/drush
+LOCAL_DRUSH=usr/bin/drush
 
 #always include at least default
 SUBSITES=(default )
