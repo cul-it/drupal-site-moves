@@ -1,5 +1,5 @@
 #!/bin/bash
-# set_permissions.sh - set up the ownership and permissions for a drupal site
+# set_permissions_dev.sh - set up the ownership and permissions for a drupal site on jgr25-dev
 
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
