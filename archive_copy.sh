@@ -27,6 +27,6 @@ message "Copy" "$SOURCE_PATH" "to"  "$TEMP_FILE"
 ConfirmOrExit
 
 message "copying $SOURCE_FILENAME" "to" "$TEMP_DIR"
-scp "$SOURCE_PATH" "$TEMP_DIR" || error_exit "Could not copy $SOURCE_PATH"
+scp -c arcfour "$SOURCE_PATH" "$TEMP_DIR" || error_exit "Could not copy $SOURCE_PATH"
 
 message "Copy complete" "$TEMP_FILE"
