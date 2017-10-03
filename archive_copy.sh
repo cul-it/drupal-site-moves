@@ -28,3 +28,5 @@ ConfirmOrExit
 
 message "copying $SOURCE_FILENAME" "to" "$TEMP_DIR"
 scp "$SOURCE_PATH" "$TEMP_DIR" || error_exit "Could not copy $SOURCE_PATH"
+
+message "Copy complete" "$TEMP_FILE"
