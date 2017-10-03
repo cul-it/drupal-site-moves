@@ -20,6 +20,7 @@ TEMP_PATH="/tmp/$USER/archive_wwwtest/$SITENAME-$STAMP/"
 TEMP_FILE="$TEMP_PATH/archive.tar.gz"
 
 sudo mkdir -p "$TEMP_PATH" || error_exit "Could not create $TEMP_PATH"
+sudo chown "$USER" "$TEMP_PATH" || error_exit "Could not make $TEMP_PATH writable"
 
 message "Creating archive..."
 
