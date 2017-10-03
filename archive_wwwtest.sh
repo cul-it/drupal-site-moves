@@ -14,9 +14,12 @@ cd "$SITEPATH" || error_exit "invalid site path $SITEPATH"
 which drush || error_exit "No drush!!!"
 drush status root || error_exit "not a valid drupal site $SITEPATH"
 
+TEMP_DIR="/tmp/$USER/archive_wwwtest"
+sudo mkdir -p "$TEMP_DIR" || "Can not create $TEMP_DIR"
+sudo chown -R "$USER" "/tmp/$USER" || "Can not set permissions /tmp/$USER."
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
-TEMP_PATH="/tmp/$USER/archive_wwwtest/$SITENAME-$STAMP/"
+TEMP_PATH="$TEMP_DIR/$SITENAME-$STAMP"
 TEMP_FILE="$TEMP_PATH/archive.tar.gz"
 
 sudo mkdir -p "$TEMP_PATH" || error_exit "Could not create $TEMP_PATH"
