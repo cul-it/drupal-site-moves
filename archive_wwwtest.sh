@@ -11,7 +11,8 @@ source ${BASEDIR}/flow_functions.sh
 
 # SITEPATH must be valid drupal site
 cd "$SITEPATH" || error_exit "invalid site path $SITEPATH"
-drush status root || error_exit "not a valid drupal site"
+which drush || error_exit "No drush!!!"
+drush status root || error_exit "not a valid drupal site $SITEPATH"
 
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
