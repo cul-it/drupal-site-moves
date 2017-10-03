@@ -27,11 +27,11 @@ echo "...CHECK"
 
 # see if site is up and running (drush sql-connect always works!)
 SITE_IS_UP=1
-drush vget site_name || SITE_IS_UP=0
+"$LOCAL_DRUSH" vget site_name || SITE_IS_UP=0
 if [ $SITE_IS_UP -eq 1 ] ;then
   message "putting $LOCAL_SITE_NAME into maintenance mode"
-  drush vset --yes maintenance_mode 1
-  drush cc all
+  "$LOCAL_DRUSH" vset --yes maintenance_mode 1
+  "$LOCAL_DRUSH" cc all
 else
   echo "site is not running. Will attempt to load database..."
 fi
@@ -43,8 +43,8 @@ echo "...CHECK"
 
 if [ $SITE_IS_UP -eq 1 ] ;then
   message "taking $LOCAL_SITE_NAME out of maintenance mode"
-  drush vset --yes maintenance_mode 0
-  drush cc all
+  "$LOCAL_DRUSH" vset --yes maintenance_mode 0
+  "$LOCAL_DRUSH" cc all
   echo "...CHECK"
 fi
 
