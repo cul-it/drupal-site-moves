@@ -27,6 +27,6 @@ sudo chown "$USER" "$TEMP_DIR" || error_exit "Could not make $TEMP_DIR writable"
 
 message "Creating archive..."
 
-drush archive-dump --destination="$TEMP_FILE" --tar-options="--exclude=.git --gzip" || "Could not create archive $TEMP_FILE"
+drush archive-dump --destination="$TEMP_FILE" --tar-options="--exclude=.git" || "Could not create archive $TEMP_FILE"
 
 message "Archive:" "$TEMP_FILE" "$USER@$HOSTNAME:$TEMP_FILE"
