@@ -4,7 +4,7 @@
 SITENAME=www.library.cornell.edu
 SITEPATH=/libweb/sites/$SITENAME/htdocs
 
-SCRIPT="$0"
+SCRIPT="site_archive"
 BASEDIR=$(dirname $0)
 source ${BASEDIR}/flow_functions.sh
 
