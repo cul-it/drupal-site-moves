@@ -20,11 +20,10 @@ sudo mkdir -p "$TEMP_DIR" || error_exit "Can not create $TEMP_DIR"
 sudo chown -R "$USER" "/tmp/$USER" || error_exit "Can not set permissions /tmp/$USER."
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
-TEMP_PATH="$TEMP_DIR/$SITENAME-$STAMP"
-TEMP_FILE="$TEMP_PATH/archive.tar.gz"
+TEMP_FILE="$TEMP_DIR/$SITENAME-$STAMP-archive.tar.gz"
 
-sudo mkdir -p "$TEMP_PATH" || error_exit "Could not create $TEMP_PATH"
-sudo chown "$USER" "$TEMP_PATH" || error_exit "Could not make $TEMP_PATH writable"
+sudo mkdir -p "$TEMP_DIR" || error_exit "Could not create $TEMP_DIR"
+sudo chown "$USER" "$TEMP_DIR" || error_exit "Could not make $TEMP_DIR writable"
 
 message "Creating archive..."
 
