@@ -23,6 +23,4 @@ SOURCE_FILENAME=$(basename $SOURCE_PATH)
 message "This will overwrite the files and database in" "$SITEPATH" "and replace them with" "$SOURCE_PATH"
 ConfirmOrExit
 
-drush archive-restore --debug --overwrite "$SOURCE_PATH" || error_exit "Restore failed."
-
-message "Restored from archive" "$SOURCE_PATH"
+drush archive-restore --debug --overwrite --destination="$SITEPATH" "$SOURCE_PATH" || error_exit "Restore failed."
