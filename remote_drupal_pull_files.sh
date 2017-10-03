@@ -36,7 +36,7 @@ sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_BACKUP_PATH}" || error_exit "can't
 echo "...CHECK"
 
 message "putting $LOCAL_SITE_NAME into maintenance mode"
-/bin/bash ${BASEDIR}/drupal_maintenance_mode.sh enter $LOCAL_PATH
+/bin/bash ${BASEDIR}/drupal_maintenance_mode.sh enter $LOCAL_PATH $LOCAL_DRUSH
 
 # rsync entire site to local
 #  --dry-run to test
@@ -86,7 +86,7 @@ sudo chown -R "$LOCAL_USER:$LOCAL_USER_GROUP" "${LOCAL_SITE_MOVES_DIRECTORY}" ||
 sudo chmod -R ug=rwX,o=rX "${LOCAL_SITE_MOVES_DIRECTORY}" || error_exit "can't chmod ${LOCAL_SITE_MOVES_DIRECTORY}"
 
 message "getting $LOCAL_SITE_NAME out of maintenance mode"
-/bin/bash ${BASEDIR}/drupal_maintenance_mode.sh exit $LOCAL_PATH
+/bin/bash ${BASEDIR}/drupal_maintenance_mode.sh exit $LOCAL_PATH $LOCAL_DRUSH
 echo "...CHECK"
 
 message "remote_drupal_pull_files complete"
