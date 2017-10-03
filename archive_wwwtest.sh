@@ -4,6 +4,7 @@
 SITENAME=wwwtest.library.cornell.edu
 SITEPATH=/cul/web/$SITENAME/htdocs
 
+SCRIPT="$0"
 BASEDIR=$(dirname $0)
 source ${BASEDIR}/flow_functions.sh
 
@@ -14,9 +15,9 @@ cd "$SITEPATH" || error_exit "invalid site path $SITEPATH"
 which drush || error_exit "No drush!!!"
 drush status root || error_exit "not a valid drupal site $SITEPATH"
 
-TEMP_DIR="/tmp/$USER/archive_wwwtest"
-sudo mkdir -p "$TEMP_DIR" || "Can not create $TEMP_DIR"
-sudo chown -R "$USER" "/tmp/$USER" || "Can not set permissions /tmp/$USER."
+TEMP_DIR="/tmp/$USER/$SCRIPT"
+sudo mkdir -p "$TEMP_DIR" || error_exit "Can not create $TEMP_DIR"
+sudo chown -R "$USER" "/tmp/$USER" || error_exit "Can not set permissions /tmp/$USER."
 
 STAMP=`date +'%Y%m%d_%H%M%S'`
 TEMP_PATH="$TEMP_DIR/$SITENAME-$STAMP"
