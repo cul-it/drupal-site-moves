@@ -1,5 +1,5 @@
 #!/bin/bash
-# set_permissions.sh - set up the ownership and permissions for a drupal site
+# set_permissions_victoria.sh - set up the ownership and permissions for a drupal site
 
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
