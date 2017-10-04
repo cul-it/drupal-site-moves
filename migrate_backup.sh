@@ -51,14 +51,14 @@ TARGETSQL="$TARGET/db.sql"
 echo $STAMP > "$TARGET/created.txt"
 
 message "Copying" "$SITEROOT" "to" "$TARGET"
-rsync -avcz
+rsync -avcz \
   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
   --exclude=sites/*/settings.php \
   --exclude=.svn --exclude=.git \
   "$SITEROOT" "$TARGET/" || error_exit "rsync failed to copy $SITEROOT"
 
 message "Copying" "$SITEFILES" "to" "$TARGET"
-rsync -avcz
+rsync -avcz \
   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
   --exclude=sites/*/settings.php \
   --exclude=.svn --exclude=.git \
