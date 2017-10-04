@@ -8,9 +8,10 @@ source ${BASEDIR}/flow_functions.sh
 [ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
 function usage() {
-  message "usage:" "$0 <source domain name> <target domain name>" \
+  message "usage:" "$0 [-n] <source domain name> <target domain name>" \
   "  <source domain name> name of backup in /tmp/$USER/$SCRIPT" \
   "  <target domain name> site on this machine" \
+  "  -n (optional) do not use maintenance mode during restore" \
   "  sites can be on victorias or jgr25-dev"  "  $1"
   echo "Backups:"
   cd "/tmp/$USER/$SCRIPT"
@@ -20,6 +21,13 @@ function usage() {
 }
 
 [ $# -eq 2 ] || usage "$0 needs 2 arguments "
+
+MAINTENANCEMODE=1
+while getopts n options
+do case "$options" in
+  n) MAINTENANCEMODE=0
+esac
+done
 
 case "$HOSTNAME" in
   victoria01.serverfarm.cornell.edu | victoria02.serverfarm.cornell.edu | victoria03.library.cornell.edu )
@@ -60,7 +68,9 @@ drush status root || error_exit "not a valid drupal site $SITEROOT"
 message "About to replace site" "$SITEROOT" "with" "$BACKUP"
 ConfirmOrExit
 
-drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
+if [[ MAINTENANCEMODE -eq 1]]; then
+  drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
+fi
 
 message "Replacing htdocs" "$SITEROOT" "with" "$BACKUPROOT"
 sudo rsync -avcz --delete \
@@ -78,7 +88,6 @@ sudo rsync -avcz --delete \
 message "Overwriting database with" "$BACKUPSQL"
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
-drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
-
-message "Update complete." "$SITEROOT"
-
+if [[ MAINTENANCEMODE -eq 1]]; then
+  drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
+fi
