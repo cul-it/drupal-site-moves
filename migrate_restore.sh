@@ -22,12 +22,7 @@ function usage() {
 
 [ $# -eq 2 ] || usage "$0 needs 2 arguments "
 
-MAINTENANCEMODE=1
-while getopts n options
-do case "$options" in
-  n) MAINTENANCEMODE=0
-esac
-done
+MAINTENANCEMODE=0
 
 case "$HOSTNAME" in
   victoria01.serverfarm.cornell.edu | victoria02.serverfarm.cornell.edu | victoria03.library.cornell.edu )
