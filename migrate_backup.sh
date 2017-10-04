@@ -71,8 +71,8 @@ drush --root="$SITEROOT" cc all || echo "Could not clear cache"
 drush --root="$SITEROOT" sql-dump --ordered-dump  --result-file="$TARGETSQL" || error_exit "Could not sql-dump"
 drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
 
-message "Setting Permissions"
+message "Setting Permissions in" "$TARGET"
 sudo chown -R "$USER:$USER" "$TARGET"
-sudo chmod -R u+r
+sudo chmod -R u+r "$TARGET"
 
-message "Backup Complete" "$TARGET" "rsync -avcz $USER@$HOSTNAME:$TARGET $TARGET"
+message "Backup Complete" "$TARGET" "Go to target machine and type" "rsync -avcz $USER@$HOSTNAME:$TARGET $TARGET"
