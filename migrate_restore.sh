@@ -22,14 +22,16 @@ function usage() {
 
 [ $# -eq 2 ] || usage "$0 needs 2 arguments "
 
-MAINTENANCEMODE=0
+MAINTENANCEMODE=1
 
 case "$HOSTNAME" in
   victoria01.serverfarm.cornell.edu | victoria02.serverfarm.cornell.edu | victoria03.library.cornell.edu )
     SITESPATH=/libweb/sites
+    HOSTTYPE=victoria
     ;;
   lib-dev-037.serverfarm.cornell.edu | jgr25-dev.library.cornell.edu )
     SITESPATH=/cul/web
+    HOSTTYPE=dev
     ;;
   *)
     usage "$0 has to run on machine where the site is, not $HOSTNAME"
