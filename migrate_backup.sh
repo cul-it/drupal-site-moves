@@ -74,4 +74,4 @@ message "Setting Permissions in" "$TARGET"
 sudo chown -R "$USER:$USER" "$TARGET"
 sudo chmod -R u+r "$TARGET"
 
-message "Backup Complete" "$TARGET" "Go to target machine and type" "rsync -avcz $USER@$HOSTNAME:$TARGET $TARGET"
+message "Backup Complete" "$TARGET" "Go to target machine and type" "rsync -avcz $USER@$HOSTNAME:$TARGET/ $TARGET/"
