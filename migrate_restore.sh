@@ -85,6 +85,9 @@ sudo rsync -avcz --delete \
 message "Overwriting database with" "$BACKUPSQL"
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
+message "Clearing cache"
+drush --root="$SITEROOT"  cc all
+
 if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
   drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
 fi
