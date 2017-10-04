@@ -32,8 +32,8 @@ SITE="$SITESPATH/$SITENAME"
 SITEROOT="$SITE/htdocs"
 SITEFILES="$SITE/drupal_files"
 
-[ -d "$SITEROOT" ] | error_exit "Missing required root directory: $SITEROOT"
-[ -d "$SITEFILES" ] | error_exit "Missing required files directory: $SITEFILES"
+[ -d "$SITEROOT" ] || error_exit "Missing required root directory: $SITEROOT"
+[ -d "$SITEFILES" ] || error_exit "Missing required files directory: $SITEFILES"
 
 # SITEROOT must be valid drupal site
 cd "$SITEROOT" || error_exit "invalid site path $SITEROOT"
