@@ -67,7 +67,7 @@ rsync -avcz \
 message "Dumping database to" "$TARGET"
 cd "$SITEROOT"
 drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
-drush --root="$SITEROOT" cc all || error_exit "Could not clear cache"
+drush --root="$SITEROOT" cc all || echo "Could not clear cache"
 drush --root="$SITEROOT" sql-dump --ordered-dump  --result-file="$TARGETSQL" || error_exit "Could not sql-dump"
 drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
 
