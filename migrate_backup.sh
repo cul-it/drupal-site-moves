@@ -51,20 +51,19 @@ TARGETSQL="$TARGET/db.sql"
 echo $STAMP > "$TARGET/created.txt"
 
 message "Copying" "$SITEROOT" "to" "$TARGET"
-rsync -avcz \
+rsync -avcz --delete \
   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
   --exclude=sites/*/settings.php \
   --exclude=.svn --exclude=.git \
   "$SITEROOT" "$TARGET/" || error_exit "rsync failed to copy $SITEROOT"
 
 message "Copying" "$SITEFILES" "to" "$TARGET"
-rsync -avcz \
+rsync -avcz --delete \
   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
-  --exclude=sites/*/settings.php \
   --exclude=.svn --exclude=.git \
   "$SITEFILES" "$TARGET/" || error_exit "rsync failed to copy $SITEFILES"
 
-message "Dumping database to" "$TARGET"
+message "Dumping database to" "$TARGETSQL"
 cd "$SITEROOT"
 drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
 drush --root="$SITEROOT" cc all || echo "Could not clear cache"
