@@ -63,7 +63,7 @@ drush status root || error_exit "not a valid drupal site $SITEROOT"
 message "About to replace site" "$SITEROOT" "with" "$BACKUP"
 ConfirmOrExit
 
-if [[ "$MAINTENANCEMODE" -eq 1]]; then
+if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
   drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
 fi
 
@@ -83,6 +83,6 @@ sudo rsync -avcz --delete \
 message "Overwriting database with" "$BACKUPSQL"
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
-if [[ "$MAINTENANCEMODE" -eq 1]]; then
+if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
   drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
 fi
