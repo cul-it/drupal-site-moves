@@ -93,9 +93,9 @@ if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
 fi
 
 if [[ "$HOSTTYPE" == 'victoria' ]]; then
-  source ${SCRIPTPATH}/set_permissions_victoria.sh
+  source ${BASEDIR}/set_permissions_victoria.sh
 else
-  source ${SCRIPTPATH}/set_permissions_dev.sh
+  source ${BASEDIR}/set_permissions_dev.sh
 fi
 
 message "Completed update of $SITENAME"
