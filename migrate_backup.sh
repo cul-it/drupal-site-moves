@@ -15,7 +15,7 @@ function usage() {
 [ $# -eq 1 ] || usage "$0 needs 1 argument "
 
 case "$HOSTNAME" in
-  victoria01.serverfarm.cornell.edu | victoria02.serverfarm.cornell.edu | victoria03.serverfarm.cornell.edu )
+  victoria01.library.cornell.edu | victoria02.library.cornell.edu | victoria03.library.cornell.edu )
     SITESPATH=/libweb/sites
     ;;
   lib-dev-037.serverfarm.cornell.edu | jgr25-dev.library.cornell.edu )
