@@ -1,9 +1,12 @@
 #!/bin/bash
 # migrate-restore.sh - restore a local site from a migrate_backup.sh backup
 
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+popd > /dev/null
+
 SCRIPT="migration"
-BASEDIR=$(dirname $0)
-source ${BASEDIR}/flow_functions.sh
+source ${SCRIPTPATH}/flow_functions.sh
 
 [ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
@@ -93,9 +96,9 @@ if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
 fi
 
 if [[ "$HOSTTYPE" == 'victoria' ]]; then
-  source ${BASEDIR}/set_permissions_victoria.sh
+  source ${SCRIPTPATH}/set_permissions_victoria.sh
 else
-  source ${BASEDIR}/set_permissions_dev.sh
+  source ${SCRIPTPATH}/set_permissions_dev.sh
 fi
 
 message "Completed update of $SITENAME"
