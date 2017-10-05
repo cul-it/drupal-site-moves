@@ -84,6 +84,7 @@ sudo rsync -avcz --delete \
   "$BACKUPFILES/" "$SITEFILES/" || error_exit "rsync failed to copy $SITEFILES"
 
 message "Overwriting database with" "$BACKUPSQL"
+drush --root="$SITEROOT" sql-drop --yes
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
 message "Clearing cache"
