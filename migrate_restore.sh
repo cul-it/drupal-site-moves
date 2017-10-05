@@ -61,9 +61,8 @@ SITEFILES="$SITE/drupal_files"
 [ -d "$SITEFILES" ] || error_exit "Missing required files directory: $SITEFILES"
 
 # SITEROOT must be valid drupal site
-cd "$SITEROOT" || error_exit "invalid site path $SITEROOT"
 which drush || error_exit "No drush!!!"
-drush status root || error_exit "not a valid drupal site $SITEROOT"
+drush --root="$SITEROOT" status root || error_exit "not a valid drupal site $SITEROOT"
 
 message "About to replace site" "$SITEROOT" "with" "$BACKUP"
 ConfirmOrExit
@@ -72,33 +71,33 @@ if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
   drush --root="$SITEROOT" vset --always-set maintenance_mode 1 || error_exit "could not enter maintenance mode"
 fi
 
-message "Replacing htdocs" "$SITEROOT" "with" "$BACKUPROOT"
-sudo rsync -avcz --delete \
-  --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
-  --exclude=sites/*/settings.php \
-  --exclude=.svn --exclude=.git \
-  "$BACKUPROOT/" "$SITEROOT/" || error_exit "rsync failed to replace $SITEROOT"
+# message "Replacing htdocs" "$SITEROOT" "with" "$BACKUPROOT"
+# sudo rsync -avcz --delete \
+#   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
+#   --exclude=sites/*/settings.php \
+#   --exclude=.svn --exclude=.git \
+#   "$BACKUPROOT/" "$SITEROOT/" || error_exit "rsync failed to replace $SITEROOT"
 
-message "Replacing files" "$SITEFILES" "with" "$BACKUPFILES"
-sudo rsync -avcz --delete \
-  --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
-  --exclude=.svn --exclude=.git \
-  "$BACKUPFILES/" "$SITEFILES/" || error_exit "rsync failed to copy $SITEFILES"
+# message "Replacing files" "$SITEFILES" "with" "$BACKUPFILES"
+# sudo rsync -avcz --delete \
+#   --omit-dir-times --no-perms --no-times --no-group --chmod=ug=rwX \
+#   --exclude=.svn --exclude=.git \
+#   "$BACKUPFILES/" "$SITEFILES/" || error_exit "rsync failed to copy $SITEFILES"
 
-message "Overwriting database with" "$BACKUPSQL"
-drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
+# message "Overwriting database with" "$BACKUPSQL"
+# drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
-message "Clearing cache"
-drush --root="$SITEROOT"  cc all
+# message "Clearing cache"
+# drush --root="$SITEROOT"  cc all
 
 if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
   drush --root="$SITEROOT" vset --always-set maintenance_mode 0 || error_exit "could not exit maintenance mode"
 fi
 
 if [[ "$HOSTTYPE" == 'victoria' ]]; then
-  source ${SCRIPTPATH}/set_permissions_victoria.sh
+  source ${SCRIPTPATH}/set_permissions_victoria.sh "$SITENAME"
 else
-  source ${SCRIPTPATH}/set_permissions_dev.sh
+  source ${SCRIPTPATH}/set_permissions_dev.sh "$SITENAME"
 fi
 
 message "Completed update of $SITENAME"

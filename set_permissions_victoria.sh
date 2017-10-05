@@ -17,7 +17,6 @@ LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_USER_GROUP=lib_web_dev_role
 LOCAL_USER_PHP=apache
 
-source ${SCRIPTPATH}/flow_functions.sh
 [ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
 function usage() {
