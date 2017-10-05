@@ -7,12 +7,13 @@ popd > /dev/null
 
 filename=$(basename $0)
 SCRIPT_ID="${filename%.*}"
+SCRIPT="migration"
 
 LOCAL_USER=$USER
 LOCAL_SITE_NAME=$1
 LOCAL_PATH=/cul/web/${LOCAL_SITE_NAME}/htdocs
 LOCAL_PRIVATE_FILES_PATH=/cul/web/${LOCAL_SITE_NAME}/drupal_files
-LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${LOCAL_USER}/${LOCAL_SITE_NAME}
+LOCAL_SITE_MOVES_AREA=/tmp/${LOCAL_USER}/${SCRIPT}/${LOCAL_SITE_NAME}
 LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_USER_GROUP=diglibdev-role
 LOCAL_USER_PHP=apache
