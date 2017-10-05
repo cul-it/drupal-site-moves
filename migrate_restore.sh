@@ -11,10 +11,9 @@ source ${SCRIPTPATH}/flow_functions.sh
 [ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
 function usage() {
-  message "usage:" "$0 [-n] <source domain name> <target domain name>" \
+  message "usage:" "$0 <source domain name> <target domain name>" \
   "  <source domain name> name of backup in /tmp/$USER/$SCRIPT" \
   "  <target domain name> site on this machine" \
-  "  -n (optional) do not use maintenance mode during restore" \
   "  sites can be on victorias or jgr25-dev"  "  $1"
   echo "Backups:"
   cd "/tmp/$USER/$SCRIPT"
