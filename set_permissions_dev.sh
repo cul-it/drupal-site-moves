@@ -43,9 +43,7 @@ esac
 # be sure sites exist where they should
 [ -d "$LOCAL_PATH" ] || error_exit "can't find $LOCAL_PATH on $LOCAL_MACHINE"
 
-sudo echo "Thanks."
 message "Hello $LOCAL_USER." "This will set all the file ownership and permissions on" $LOCAL_SITE_NAME
-ConfirmOrExit
 
 # set up the local work area for pull_site_from_production or pull_site_from_test
 sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't make directory $LOCAL_SITE_MOVES_DIRECTORY"
