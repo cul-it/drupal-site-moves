@@ -86,7 +86,7 @@ sudo rsync -avcz --delete \
   --exclude=.svn --exclude=.git \
   "$BACKUPFILES/" "$SITEFILES/" || error_exit "rsync failed to copy $SITEFILES"
 
-message "Overwriting database with" "$BACKUPSQL" "backup in" "$ORIGINALSQL"
+message "Overwriting database with" "$BACKUPSQL"
 drush --root="$SITEROOT" sql-drop --yes || error_exit "Could not drop old database"
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL" || error_exit "Could not replace database."
 
