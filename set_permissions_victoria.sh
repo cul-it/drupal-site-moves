@@ -17,8 +17,8 @@ LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_USER_GROUP=lib_web_dev_role
 LOCAL_USER_PHP=apache
 
-BASEDIR=$(dirname $0)
-source ${BASEDIR}/flow_functions.sh
+source ${SCRIPTPATH}/flow_functions.sh
+[ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
 function usage() {
   message "usage:" "$0 <site name>" "  <site name> on one of the victorias (where you must be)" "" "  $1"
