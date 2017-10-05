@@ -66,7 +66,7 @@ sudo echo "Thanks." || error_exit "We'll be needing sudo."
 which drush || error_exit "No drush!!!"
 drush --root="$SITEROOT" status root || error_exit "not a valid drupal site $SITEROOT"
 
-message "About to replace site" "$SITEROOT" "with" "$BACKUP"
+message "About to replace site" "$SITEROOT" "with" "$BACKUP" "Consider backing up $SITENAME first with" "./migrate_backup.sh $SITENAME"
 ConfirmOrExit
 
 if [[ "$MAINTENANCEMODE" -eq 1 ]]; then
