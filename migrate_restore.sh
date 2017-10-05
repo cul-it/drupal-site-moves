@@ -59,6 +59,13 @@ SITEFILES="$SITE/drupal_files"
 [ -d "$SITEROOT" ] || error_exit "Missing required root directory: $SITEROOT"
 [ -d "$SITEFILES" ] || error_exit "Missing required files directory: $SITEFILES"
 
+# make a place to store the original database
+STAMP=`date +'%Y%m%d_%H%M%S'`
+ORIGINALSQLDIR="/tmp/$USER/$SCRIPT/$SITENAME_$STAMP"
+sudo mkdir -p  "$ORIGINALSQLDIR" || error_exit "Unable to create directory $ORIGINALSQLDIR"
+sudo chown "$USER:$USER" "$ORIGINALSQLDIR" || error_exit "Unable to set privileges on $ORIGINALSQLDIR"
+ORIGINALSQL="$ORIGINALSQLDIR/db.sql"
+
 # SITEROOT must be valid drupal site
 which drush || error_exit "No drush!!!"
 drush --root="$SITEROOT" status root || error_exit "not a valid drupal site $SITEROOT"
@@ -83,8 +90,8 @@ sudo rsync -avcz --delete \
   --exclude=.svn --exclude=.git \
   "$BACKUPFILES/" "$SITEFILES/" || error_exit "rsync failed to copy $SITEFILES"
 
-message "Overwriting database with" "$BACKUPSQL"
-drush --root="$SITEROOT" sql-drop --yes
+message "Overwriting database with" "$BACKUPSQL" "backup in" "$ORIGINALSQL"
+drush --root="$SITEROOT" sql-drop --yes --result-file="$ORIGINALSQL" || error_exit "Could not drop old database"
 drush --root="$SITEROOT" sql-cli < "$BACKUPSQL"
 
 message "Clearing cache"
