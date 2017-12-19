@@ -1,5 +1,5 @@
 #!/bin/bash
-# set_permissions.sh - set up the ownership and permissions for a drupal site
+# set_permissions_dev.sh - set up the ownership and permissions for a drupal site on jgr25-dev
 
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
@@ -7,18 +7,19 @@ popd > /dev/null
 
 filename=$(basename $0)
 SCRIPT_ID="${filename%.*}"
+SCRIPT="migration"
 
 LOCAL_USER=$USER
 LOCAL_SITE_NAME=$1
-LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
-LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
-LOCAL_SITE_MOVES_AREA=/tmp/drupal-site-moves/${LOCAL_USER}/${LOCAL_SITE_NAME}
+LOCAL_PATH=/cul/web/${LOCAL_SITE_NAME}/htdocs
+LOCAL_PRIVATE_FILES_PATH=/cul/web/${LOCAL_SITE_NAME}/drupal_files
+LOCAL_SITE_MOVES_AREA=/tmp/${LOCAL_USER}/${SCRIPT}/${LOCAL_SITE_NAME}
 LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
-LOCAL_USER_GROUP=lib_web_dev_role
+LOCAL_USER_GROUP=diglibdev-role
 LOCAL_USER_PHP=apache
 
-BASEDIR=$(dirname $0)
-source ${BASEDIR}/flow_functions.sh
+source ${SCRIPTPATH}/flow_functions.sh
+[ -z "$flow_functions" ] && echo "$0 requires flow_functions.sh" && exit 1
 
 function usage() {
   message "usage:" "$0 <site name>" "  <site name> on one of the victorias (where you must be)" "" "  $1"
@@ -29,7 +30,7 @@ function usage() {
 
 # $HOSTNAME on the servers
 VICTORIA01=victoria01.serverfarm.cornell.edu
-VICTORIA02=victoria02.serverfarm.cornell.edu
+VICTORIA02=lib-dev-037.serverfarm.cornell.edu
 VICTORIA03=victoria03.library.cornell.edu
 
 # use 0 for test server 1 for production server
@@ -42,9 +43,7 @@ esac
 # be sure sites exist where they should
 [ -d "$LOCAL_PATH" ] || error_exit "can't find $LOCAL_PATH on $LOCAL_MACHINE"
 
-sudo echo "Thanks."
 message "Hello $LOCAL_USER." "This will set all the file ownership and permissions on" $LOCAL_SITE_NAME
-ConfirmOrExit
 
 # set up the local work area for pull_site_from_production or pull_site_from_test
 sudo mkdir -p "$LOCAL_SITE_MOVES_DIRECTORY" || error_exit "Can't make directory $LOCAL_SITE_MOVES_DIRECTORY"
