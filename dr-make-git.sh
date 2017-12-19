@@ -1,6 +1,6 @@
 #!/bin/bash
-# dr-make-git.sh - drush make for Drupal sites on victoria02
-# assumes /libweb/sites/<domain>/make/<domain> is a git repo with
+# dr-make-git.sh - drush make for Drupal sites on jgr25-dev
+# assumes /cul/web/<domain>/make/<domain> is a git repo with
 # a drush make file in it named drush.make
 #
 # sudo ./dr-make-git.sh <alias> [<sitegroup>]
@@ -8,18 +8,24 @@
 #	and [<sitegroup>] is an optional argument - if present it becomes sitegroup
 #
 # Global vars
-sitedir="/libweb/sites"
-sitegroup="lib_web_dev_role"
+sitedir="/cul/web"
+sitegroup="diglibdev-role"
 # on artslib user:group is webmstr:diglibdev-role
 # on copia user:group is jgr25:webmstr
 # on libdev user:group is jgr25:nobody
 # on victoria02 user:group is jgr25:apache
+# on jgr25-dev user:group is jgr25:diglibdev-role
 # apache is both a user and a group
 phprunner="apache"
 filesuser=$USER
 
 # sudo just to get the password thing over with
 sudo echo "Thanks for that. Some things here have to use sudo and others must not."
+
+# get path to current script
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+popd > /dev/null
 
 drush --version
 
@@ -55,9 +61,9 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # try to find alias without argument using standard directory layout
-# /libweb/sites/[sitename]/make/[sitename]/[sitename].make
+# /cul/web/[sitename]/make/[sitename]/[sitename].make
 # assumes you are here .....^
-sitename=`echo ${PWD#/libweb/sites/} | cut -d "/" -f1`
+sitename=`echo ${PWD#/cul/web/} | cut -d "/" -f1`
 makefile="$sitename/drush.make"
 echo ".make file = $makefile"
 echo "sitename = $sitename"
@@ -71,10 +77,9 @@ if [ -z "$sitename" ]; then
 	fi
 
 	# first argument should be an alias
-	sitename=`drush site-alias --component=uri "$1"`
-	[[ -n "$sitename" ]] || error_exit "$1 is not a valid alias"
-
 	alias="$1"
+	drush drupal-directory -q "$alias" || error_exit "$alias is not a valid alias"
+	sitename=$(echo $alias | cut -d'@' -f 2)
 
 	# optional second argument is sitegroup
 	if [ $# -eq 2 ]; then
@@ -92,8 +97,9 @@ else
 	alias+=$sitename
 
 	# test the alias
-	sitename2=`drush site-alias --component=uri "$alias"`
-	[[ -n "$sitename2" ]] || error_exit "$alias is not a valid alias"
+	drush drupal-directory -q "$alias" || error_exit "$alias is not a valid alias"
+	# sitename2=`drush site-alias --component=uri "$alias"`
+	# [[ -n "$sitename2" ]] || error_exit "$alias is not a valid alias"
 fi
 
 echo "*******************"
@@ -141,6 +147,9 @@ fi
 
 # supply defaults for anything that might be in the configuration file
 DRUPALSITESPATH=${DRUPALSITESPATH:-"$sitedir/$sitename/htdocs"}
+echo "*******************"
+echo "DRUPALSITESPATH = $DRUPALSITESPATH"
+echo "*******************"
 
 #remove the old build - sudo
 if [ -d target ]
@@ -160,7 +169,7 @@ fi
 echo "*******************"
 echo "making new working copy of $sitename"
 echo "*******************"
-INSTALLED=`drush --root=$DRUPALSITESPATH --pipe status | grep 'drupal_bootstrap=Successful'`
+INSTALLED=`drush --root=$DRUPALSITESPATH --fields=bootstrap status | grep 'Successful'`
 if [ -z "$INSTALLED" ]
 then
 	# drupal is not installed in this site - check if something else is wrong
@@ -421,7 +430,7 @@ then
 fi
 
 echo "*******************"
-echo "cleaning up .htaccess files"
+echo " cleaning up .htaccess files"
 echo "*******************"
 
 if [ -a target/.htaccess ]
@@ -466,6 +475,9 @@ echo "making a restrictive robots.txt file"
 echo "*******************"
 echo -e 'User-agent: *\nDisallow: /' > target/robots.txt
 
+echo "*******************"
+echo "setting permissions for settings.php"
+echo "*******************"
 if [ $update -eq 0 ]
 then
 	# Drupal will complain during install if it can't write to the settings.php file
@@ -526,6 +538,10 @@ then
 	fi
 fi
 
+echo "*******************"
+echo "set permissions for everything in $sitename"
+echo "*******************"
+source ${SCRIPTPATH}/set_permissions.sh "$sitename"
 
 echo "*******************"
 echo "Done."

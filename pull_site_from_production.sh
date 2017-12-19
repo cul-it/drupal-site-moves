@@ -18,19 +18,21 @@ REMOTE_SITE_MOVES_AREA=${REMOTE_SCRIPT_TMP_DIRECTORY}/${USER}/${REMOTE_SITE_NAME
 REMOTE_SITE_MOVES_DIRECTORY=${REMOTE_SITE_MOVES_AREA}
 REMOTE_SITE_MOVES_BACKUP_PATH=${REMOTE_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
 REMOTE_USER_GROUP=lib_web_dev_role
+REMOTE_DRUSH=/usr/bin/drush
 
 LOCAL_USER=$USER
-LOCAL_MACHINE=victoria02.serverfarm.cornell.edu
+LOCAL_MACHINE=lib-dev-037.serverfarm.cornell.edu
 LOCAL_SITE_NAME=$2
-LOCAL_PATH=/libweb/sites/${LOCAL_SITE_NAME}/htdocs
-LOCAL_PRIVATE_FILES_PATH=/libweb/sites/${LOCAL_SITE_NAME}/drupal_files
+LOCAL_PATH=/cul/web/${LOCAL_SITE_NAME}/htdocs
+LOCAL_PRIVATE_FILES_PATH=/cul/web/${LOCAL_SITE_NAME}/drupal_files
 LOCAL_SCRIPT_TMP_DIRECTORY=/tmp/drupal-site-moves
 LOCAL_SITE_MOVES_USER_DIRECTORY=${LOCAL_SCRIPT_TMP_DIRECTORY}/${USER}
 LOCAL_SITE_MOVES_AREA=${LOCAL_SITE_MOVES_USER_DIRECTORY}/${LOCAL_SITE_NAME}
 LOCAL_SITE_MOVES_DIRECTORY=${LOCAL_SITE_MOVES_AREA}
 LOCAL_SITE_MOVES_BACKUP_PATH=${LOCAL_SITE_MOVES_DIRECTORY}/${SCRIPT_ID}
-LOCAL_USER_GROUP=lib_web_dev_role
+LOCAL_USER_GROUP=diglibdev-role
 LOCAL_USER_PHP=apache
+LOCAL_DRUSH=/users/jgr25/.composer/vendor/bin/drush
 
 #always include at least default
 SUBSITES=(default )
@@ -53,7 +55,7 @@ function usage() {
 
 # $HOSTNAME on the servers
 VICTORIA01=victoria01.serverfarm.cornell.edu
-VICTORIA02=victoria02.serverfarm.cornell.edu
+VICTORIA02=lib-dev-037.serverfarm.cornell.edu
 VICTORIA03=victoria03.library.cornell.edu
 
 # check site arguments
